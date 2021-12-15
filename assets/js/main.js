@@ -2,14 +2,14 @@ import * as projects from "./projects.js";
 import * as utils from "./utils.js";
 
 //Declarations
-let myProjects;
+let prjs;
 
 //Queries
-const projectsSection = document.querySelector(".projects-container");
+const prjs_section = document.querySelector(".projects-container");
 const scrollUp = document.querySelector("#scroll-up");
 
 function init() {
-    myProjects = projects.initAll();
+    prjs = projects.initAll();
     populateProjects();
 
     //Event Listeners
@@ -43,59 +43,63 @@ function updateStyling() {
 }
 
 function populateProjects() {
-    projectsSection.innerHTML = "";
+    prjs_section.innerHTML = "";
+    let prjs_prof = document.createElement("div");
+    prjs_prof.classList.add("projects-subtype");
+    let prjs_pers = document.createElement("div");
+    prjs_pers.classList.add("projects-subtype");
 
     //Check if all projects are showing
-    let pSeeAll = document.querySelector("#projects-see-all");
-    pSeeAll.style.display = myProjects.length < projects.getAllProjects().length ? "block" : "none";
-    pSeeAll.addEventListener("click", function() {
-        myProjects = projects.getAllProjects();
+    let prjs_seeAll = document.querySelector("#projects-see-all");
+    prjs_seeAll.style.display = prjs.length < projects.getAllProjects().length ? "block" : "none";
+    prjs_seeAll.addEventListener("click", function() {
+        prjs = projects.getAllProjects();
         populateProjects();
     });
 
-    myProjects.forEach(p => {
+    prjs.forEach(p => {
         //Initialize elements
-        let pContainer = document.createElement("div");
-        let pContent = document.createElement("div");
-        let pVidContainer = document.createElement("div");
-        let pVid = document.createElement("video");
-        let pVidSource = document.createElement("source");
-        let pTitle = document.createElement("h3");
-        let pDetails = document.createElement("p");
-        let pTags = document.createElement("div");
-        let pTitleTags = document.createElement("div");
+        let prj_card = document.createElement("div");
+        let prj_cont = document.createElement("div");
+        let prj_vid_block = document.createElement("div");
+        let prj_vid = document.createElement("video");
+        let prj_vid_source = document.createElement("source");
+        let prj_title = document.createElement("h3");
+        let prj_det = document.createElement("p");
+        let prj_tags = document.createElement("div");
+        let prj_title_tags = document.createElement("div");
 
-        pContainer.classList.add("project-card", "dark-back");
-        pContent.classList.add("project-content");
+        prj_card.classList.add("project-card", "dark-back");
+        prj_cont.classList.add("project-content");
 
         //Video preview
-        pVid.className = "project-preview";
-        pVid.muted = true;
-        pVid.loop = true;
-        pVid.addEventListener("mouseover", function() {
+        prj_vid.className = "project-preview";
+        prj_vid.muted = true;
+        prj_vid.loop = true;
+        prj_vid.addEventListener("mouseover", function() {
             this.play();
         });
-        pVid.addEventListener("mouseleave", function() {
+        prj_vid.addEventListener("mouseleave", function() {
             this.pause();
             this.currentTime = 0;
         });
 
         //Other details
-        pVidSource.src = p.imgPath;
-        pVidSource.type = "video/mp4";
-        pVidContainer.classList.add("project-preview-container");
-        pTitle.classList.add("project-title");
-        pTitle.innerText = p.title;
-        pDetails.className = "project-details";
-        pDetails.innerText = p.details;
+        prj_vid_source.src = p.imgPath;
+        prj_vid_source.type = "video/mp4";
+        prj_vid_block.classList.add("project-preview-container");
+        prj_title.classList.add("project-title");
+        prj_title.innerText = p.title;
+        prj_det.className = "project-details";
+        prj_det.innerText = p.details;
 
-        pVid.appendChild(pVidSource);
-        pVidContainer.appendChild(pVid);
-        pContent.appendChild(pVidContainer);
-        pContent.appendChild(pDetails);
+        prj_vid.appendChild(prj_vid_source);
+        prj_vid_block.appendChild(prj_vid);
+        prj_cont.appendChild(prj_vid_block);
+        prj_cont.appendChild(prj_det);
 
         //Project tags
-        pTags.classList.add("project-tags");
+        prj_tags.classList.add("project-tags");
         p.tags.forEach(t => {
             let pt = document.createElement("div");
             pt.classList.add("project-tag");
@@ -103,27 +107,42 @@ function populateProjects() {
             pt.style.backgroundColor = projects.getTagColor(t.type);
             pt.addEventListener("click", function() {
                 projects.initByTag(t.name);
-                myProjects = projects.getActiveProjects();
+                prjs = projects.getActiveProjects();
                 populateProjects();
             });
-            pTags.appendChild(pt);
+            prj_tags.appendChild(pt);
         });
-        pTitleTags.classList.add("project-title-tags");
-        p.titleTags.forEach(tt => {
-            let ptt = document.createElement("a");
-            ptt.classList.add("project-title-tag");
-            ptt.innerText = tt.type;
-            ptt.style.color = "white";
-            pTitleTags.appendChild(ptt);
-        });
+        prj_title_tags.classList.add("project-title-tags");
+
+        //Title tag
+        let ptt = document.createElement("a");
+        ptt.classList.add("project-title-tag");
+        ptt.innerText = p.titleTags.type;
+        if (p.titleTags.subtype) ptt.innerText += " - " + p.titleTags.subtype;
+        ptt.style.color = "white";
+        prj_title_tags.appendChild(ptt);
 
         //Append elements
-        pContainer.appendChild(pTitle);
-        pContainer.appendChild(pTitleTags);
-        pContainer.appendChild(pContent);
-        pContainer.appendChild(pTags);
+        prj_card.appendChild(prj_title);
+        prj_card.appendChild(prj_title_tags);
+        prj_card.appendChild(prj_cont);
+        prj_card.appendChild(prj_tags);
 
-        projectsSection.appendChild(pContainer);
+        //Sort types of projects
+        switch (p.titleTags.type) {
+            case "Professional":
+                prjs_prof.appendChild(prj_card);
+                break;
+            case "Personal":
+                prjs_pers.appendChild(prj_card);
+                break;
+            default:
+                prjs_pers.appendChild(prj_card);
+                break;
+        }
+
+        prjs_section.appendChild(prjs_prof);
+        prjs_section.appendChild(prjs_pers);
 
         updateStyling();
     });

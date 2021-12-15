@@ -7,12 +7,13 @@
     --normal-font: 400;
     --bold-font: 700;
     --bolder-font: 900;
-    --bg-color: #000000;
     --primary-color: #ff652f;
     --secondary-color: #ffe400;
     --tertiary-color: #14a76c;
     --primary-shadow: #272727;
-    --secondary-shadow: #747474;
+    --secondary-shadow: #464646;
+    --tertiary-shadow: #1d1d1d;
+    --bg-color: var(--secondary-shadow);
     --bottom-margin: 0.5rem;
     --bottom-margin-2: 1rem;
     --line-height: 1.7rem;
@@ -38,11 +39,16 @@ html {
 
 body {
     font-family: var(--font-family);
+    background-color: var(--bg-color);
 }
 
 .section-divider {
+    display: flex;
     background-color: var(--primary-shadow);
     padding: 0.5em;
+    font-size: 1.5rem;
+    justify-content: center;
+    height: 5rem;
 }
 
 #projects-see-all {
@@ -63,7 +69,7 @@ body {
 
 h2 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin: auto;
 }
 
 ul {
@@ -113,6 +119,7 @@ nav {
     width: auto;
     height: auto;
     padding: 0 var(--nav-pad);
+    font-size: 2rem;
     font-weight: var(--bold-font);
 }
 
@@ -130,7 +137,7 @@ nav ul {
     /* This will center the border. */
     width: 0%;
     /* Change this to whatever width you want. */
-    border-bottom: 0.2em solid white;
+    border-bottom: 0.4em solid white;
     /* This creates the border. Replace black with whatever color you want. */
     transition: var(--transition) ease;
 }
@@ -149,6 +156,7 @@ nav ul {
     width: auto;
     height: auto;
     color: var(--secondary-color);
+    font-size: 2rem;
 }
 
 
@@ -199,15 +207,20 @@ nav ul {
 }
 
 .projects-container {
+    display: block;
+}
+
+.projects-subtype {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: auto;
 }
 
 .project-card {
-    border: 0.1rem solid var(--secondary-shadow);
+    border: 0.1rem solid var(--primary-shadow);
     border-radius: 2%;
-    box-shadow: 0 0.1rem 0.5rem 0.1rem var(--secondary-shadow);
+    box-shadow: 0 0.1rem 0.5rem 0.1rem var(--primary-shadow);
     text-align: center;
     width: 20rem;
     height: auto;
@@ -379,8 +392,13 @@ nav ul {
 }
 
 .socicon:hover {
-    border-radius: 25%;
+    -webkit-filter: invert(1);
+    filter: invert(1);
     box-shadow: 0.2rem 0.5rem 0.5rem gray;
+}
+
+.socicon:active {
+    border-radius: 40%;
 }
 
 
@@ -390,7 +408,8 @@ nav ul {
 /*#region header & footer & page controls*/
 
 footer {
-    background-color: var(--bg-color);
+    color: white;
+    background-color: var(--primary-shadow);
     padding: 1.25rem;
     text-align: center;
     margin: 2rem 0 0;
