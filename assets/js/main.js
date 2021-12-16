@@ -96,7 +96,6 @@ function populateProjects() {
         prj_vid.appendChild(prj_vid_source);
         prj_vid_block.appendChild(prj_vid);
         prj_cont.appendChild(prj_vid_block);
-        prj_cont.appendChild(prj_det);
 
         //Project tags
         prj_tags.classList.add("project-tags");
@@ -123,10 +122,11 @@ function populateProjects() {
         prj_title_tags.appendChild(ptt);
 
         //Append elements
+        prj_cont.appendChild(prj_tags);
+        prj_cont.appendChild(prj_det);
         prj_card.appendChild(prj_title);
         prj_card.appendChild(prj_title_tags);
         prj_card.appendChild(prj_cont);
-        prj_card.appendChild(prj_tags);
 
         //Sort types of projects
         switch (p.titleTags.type) {

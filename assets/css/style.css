@@ -44,6 +44,7 @@ body {
 
 .section-divider {
     display: flex;
+    flex-direction: column;
     background-color: var(--primary-shadow);
     padding: 0.5em;
     font-size: 1.5rem;
@@ -202,11 +203,12 @@ nav ul {
 /*#region projects*/
 
 .projects {
-    padding: 0.5rem 0;
-    margin-top: 2rem;
+    margin: 2rem;
+    background-color: var(--tertiary-shadow);
 }
 
 .projects-container {
+    padding: 2rem;
     display: block;
 }
 
@@ -220,7 +222,7 @@ nav ul {
 .project-card {
     border: 0.1rem solid var(--primary-shadow);
     border-radius: 2%;
-    box-shadow: 0 0.1rem 0.5rem 0.1rem var(--primary-shadow);
+    box-shadow: 0 0.1rem 0.5rem 0.1rem var(--secondary-shadow);
     text-align: center;
     width: 20rem;
     height: auto;
@@ -269,18 +271,21 @@ nav ul {
 }
 
 .project-card p {
+    background-color: var(--secondary-shadow);
+    border-radius: 0.5em;
     font-size: 0.8rem;
-    padding: 0.4em;
-    margin: 0.4em;
+    padding: 1em;
+    margin: 0.5rem;
 }
 
-.project-card .project-tags {
+.project-tags {
     display: flex;
     flex-wrap: wrap;
-    margin: 0.1em;
+    justify-content: center;
+    margin: 1rem;
 }
 
-.project-card .project-tag {
+.project-tag {
     color: white;
     opacity: 75%;
     border-radius: 0.5em;
@@ -291,19 +296,19 @@ nav ul {
     transition: var(--transition);
 }
 
-.project-card .project-tag:hover {
+.project-tag:hover {
     opacity: 100%;
     border-color: white;
 }
 
-.project-card .project-title-tags {
+.project-title-tags {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
 
-.project-card .project-title-tag {
+.project-title-tag {
     margin: 0.4em;
     padding: 0.2em;
     border-radius: 0.2em;
@@ -316,7 +321,8 @@ nav ul {
 /*#region contact*/
 
 .contact {
-    margin-top: 2rem;
+    background-color: var(--tertiary-shadow);
+    margin: 2rem;
 }
 
 .contact h2 {
@@ -324,77 +330,35 @@ nav ul {
     margin-bottom: var(--bottom-margin-2);
 }
 
-.contact-form-container {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 1rem;
-    border-radius: 1%;
-    border: 0.1rem solid var(--primary-shadow);
-    box-shadow: 0 0.1rem 0.5rem 0.1rem var(--secondary-shadow);
+.contact .contact-content {
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem;
 }
 
-.contact-form-container label {
-    line-height: 3em;
-    font-weight: var(--bold-font);
+.contact p {
+    margin: auto;
+    width: 50%;
     color: white;
-}
-
-.contact-form-container textarea {
-    min-height: 6rem;
-    font-size: 14em;
-}
-
-.contact-form-container .input-field {
-    width: 100%;
-    padding: 0.5em;
-    border-radius: 0.2em;
-    border: none;
-    border: 0.1rem outset var(--primary-color);
-    font-size: 1rem;
-    outline: none;
-}
-
-.input-field::placeholder {
-    color: black;
-}
-
-.contact-form-container .submit-btn {
-    width: 100%;
-    padding: 0.5em;
-    margin: 0.5em 0;
-    background-color: #fff;
-    border: 0.2em solid var(--primary-color);
-    border-radius: 0.2em;
-    font-size: 1rem;
-    font-weight: var(--bold-font);
-    transition: var(--transition);
-}
-
-.contact-form-container .submit-btn:hover {
-    background-color: var(--primary-color);
-    border: 0.2em solid var(--primary-color);
-    cursor: pointer;
 }
 
 .socials {
     display: flex;
-    flex-direction: column;
-    position: fixed;
-    right: 1%;
-    bottom: 20%;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem;
 }
 
 .socicon {
+    position: relative;
     width: 3rem;
     height: 3rem;
-    margin: 0.5rem 0;
+    margin: 1rem;
     transition: var(--transition);
 }
 
 .socicon:hover {
-    -webkit-filter: invert(1);
-    filter: invert(1);
-    box-shadow: 0.2rem 0.5rem 0.5rem gray;
+    border-radius: 30%;
 }
 
 .socicon:active {
