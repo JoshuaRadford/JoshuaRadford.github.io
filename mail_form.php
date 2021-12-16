@@ -1,7 +1,8 @@
 <?php
 if(isset($_POST['email'])) {
  
-
+  header('Access-Control-Allow-Origin: *');
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
     // EDIT THE 2 LINES BELOW AS REQUIRED
     $email_to = "joshuaradford99@yahoo.com";
