@@ -1,17 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
-
 /*#region variables*/
 
 :root {
-    --font-family: "Roboto", sans-serif;
-    --normal-font: 400;
+    --header-font-family: "Ubuntu";
+    --paragraph-font-family: "Source-Code-Pro": ;
     --bold-font: 700;
     --bolder-font: 900;
-    --primary-color: #ff652f;
-    --secondary-color: #ffe400;
-    --tertiary-color: #14a76c;
+    --primary-color: #8F0C2B;
+    --primary-highlight-color: #EF476F;
     --primary-shadow: #272727;
+    --secondary-color: #B37D00;
+    --secondary-highlight-color: #FFD166;
     --secondary-shadow: #464646;
+    --tertiary-color: #118AB2;
+    --tertiary-highlight-color: #30BDEC;
     --tertiary-shadow: #1d1d1d;
     --bg-color: var(--secondary-shadow);
     --bottom-margin: 0.5rem;
@@ -38,7 +39,7 @@ html {
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: var(--header-font-family);
     background-color: var(--bg-color);
 }
 
@@ -55,11 +56,9 @@ body {
 #projects-see-all {
     display: none;
     text-align: center;
-    color: white;
     opacity: 50%;
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: var(--bolder-font);
-    padding: 0.5em;
     cursor: pointer;
     transition: var(--transition);
 }
@@ -68,9 +67,22 @@ body {
     opacity: 100%;
 }
 
+p {
+    font-family: var(--paragraph-font-family);
+}
+
 h2 {
+    display: inline;
+    font-family: var(--header-font-family);
+    color: var(--primary-color);
     text-align: center;
     margin: auto;
+}
+
+h3 {
+    font-family: var(--header-font-family);
+    color: var(--primary-color);
+    font-style: italic;
 }
 
 ul {
@@ -90,11 +102,15 @@ ul {
 
 a {
     text-decoration: none;
-    color: var(--primary-color);
+    color: white;
 }
 
 a:hover {
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
+}
+
+a:active {
+    color: var(--tertiary-highlight-color);
 }
 
 
@@ -121,7 +137,7 @@ nav {
     height: auto;
     padding: 0 var(--nav-pad);
     font-size: 2rem;
-    font-weight: var(--bold-font);
+    font-weight: var(--bolder-font);
 }
 
 nav ul {
@@ -133,12 +149,13 @@ nav ul {
     content: "";
     /* This is necessary for the pseudo element to work. */
     display: block;
+    position: relative;
     /* This will put the pseudo element on its own line. */
-    margin: 0 auto;
+    margin: auto;
     /* This will center the border. */
     width: 0%;
     /* Change this to whatever width you want. */
-    border-bottom: 0.4em solid white;
+    border-bottom: 0.35rem solid white;
     /* This creates the border. Replace black with whatever color you want. */
     transition: var(--transition) ease;
 }
@@ -148,7 +165,7 @@ nav ul {
 }
 
 .animate-underline:active:after {
-    width: 100%;
+    width: 75%;
 }
 
 #homeName {
@@ -156,8 +173,12 @@ nav ul {
     padding: 0 var(--nav-pad);
     width: auto;
     height: auto;
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
     font-size: 2rem;
+}
+
+#homeName:hover {
+    color: var(--tertiary-highlight-color)
 }
 
 
@@ -223,10 +244,10 @@ nav ul {
     border: 0.1rem solid var(--primary-shadow);
     border-radius: 2%;
     box-shadow: 0 0.1rem 0.5rem 0.1rem var(--secondary-shadow);
+    overflow: hidden;
     text-align: center;
-    width: 20rem;
-    height: auto;
-    padding: 1rem;
+    width: 30%;
+    height: fit-content;
     margin: 1rem;
 }
 
@@ -238,12 +259,25 @@ nav ul {
 }
 
 .project-title {
-    margin-bottom: 0.1em;
+    background-color: black;
+    padding: 0.5rem;
 }
 
 .project-details {
-    width: auto;
-    margin-bottom: var(--bottom-margin);
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0;
+    bottom: 0;
+    background-color: var(--secondary-shadow);
+    font-size: 0.8rem;
+}
+
+.project-details-title {
+    color: white;
+    width: 100%;
+    font-weight: var(--bold-font);
+    padding: 0.25rem;
+    background-color: var(--secondary-shadow);
 }
 
 .project-preview-container {
@@ -270,28 +304,27 @@ nav ul {
     transform: scale(1.2);
 }
 
-.project-card p {
-    background-color: var(--secondary-shadow);
-    border-radius: 0.5em;
-    font-size: 0.8rem;
-    padding: 1em;
-    margin: 0.5rem;
-}
-
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 1rem;
+    margin: 0.5rem;
+}
+
+.project-title-tags {
+    font-weight: var(--bold-font);
+    padding: 0.5rem;
+    background-color: black;
 }
 
 .project-tag {
     color: white;
     opacity: 75%;
-    border-radius: 0.5em;
-    border: 0.2em solid transparent;
-    margin: 0.1em;
-    padding: 0.4em;
+    font-size: 1rem;
+    border-radius: 0.25em;
+    border: 0.2em solid white;
+    margin: 0.2em;
+    padding: 0.2em;
     cursor: pointer;
     transition: var(--transition);
 }
@@ -301,17 +334,11 @@ nav ul {
     border-color: white;
 }
 
-.project-title-tags {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
 .project-title-tag {
-    margin: 0.4em;
+    cursor: pointer;
+    color: white;
+    margin: 0.2rem;
     padding: 0.2em;
-    border-radius: 0.2em;
 }
 
 
@@ -400,7 +427,7 @@ footer {
 
 /*changes reflects on screen with a width of 720px and below*/
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 1080px) {
     /*#region nav*/
     nav {
         display: block;
@@ -408,6 +435,18 @@ footer {
     /*#endregion*/
     .contact-form-container {
         max-width: 24rem;
+    }
+    .project-card {
+        width: 90%;
+        height: auto;
+    }
+    .project-content {
+        flex-direction: column;
+    }
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 

@@ -27,11 +27,14 @@ function init() {
 function updateStyling() {
     //Randomize text color of certain elements
     const elems = [];
-    elems.push(Array.from(document.querySelectorAll(".nav-link")));
-    elems.push(Array.from(document.querySelectorAll("h2")));
-    elems.push(Array.from(document.querySelectorAll("h3")));
+    //elems.push(Array.from(document.querySelectorAll(".nav-link")));
+    //elems.push(Array.from(document.querySelectorAll("h2")));
+    //elems.push(Array.from(document.querySelectorAll("h3")));
+
+    // Iterate these elements
     elems.forEach(e => {
         let colors = utils.themeColors.slice();
+        // Iterate nested elements
         e.forEach(n => {
             const rColor = colors[utils.getRandomInt(colors.length)];
             //Validates a 6-digit hex color or CSS color
@@ -51,7 +54,7 @@ function populateProjects() {
 
     //Check if all projects are showing
     let prjs_seeAll = document.querySelector("#projects-see-all");
-    prjs_seeAll.style.display = prjs.length < projects.getAllProjects().length ? "block" : "none";
+    prjs_seeAll.style.display = prjs.length < projects.getAllProjects().length ? "inline-block" : "none";
     prjs_seeAll.addEventListener("click", function() {
         prjs = projects.getAllProjects();
         populateProjects();
@@ -65,6 +68,7 @@ function populateProjects() {
         let prj_vid = document.createElement("video");
         let prj_vid_source = document.createElement("source");
         let prj_title = document.createElement("h3");
+        let prj_det_title = document.createElement("div");
         let prj_det = document.createElement("p");
         let prj_tags = document.createElement("div");
         let prj_title_tags = document.createElement("div");
@@ -91,11 +95,26 @@ function populateProjects() {
         prj_title.classList.add("project-title");
         prj_title.innerText = p.title;
         prj_det.className = "project-details";
+        prj_det_title.innerText = p.detailsTitle;
+        prj_det_title.className = "project-details-title";
         prj_det.innerText = p.details;
 
         prj_vid.appendChild(prj_vid_source);
         prj_vid_block.appendChild(prj_vid);
-        prj_cont.appendChild(prj_vid_block);
+
+        //Title tag
+        prj_title_tags.classList.add("project-title-tags");
+        p.titleTags.forEach(t => {
+            let ptt = document.createElement("a");
+            ptt.classList.add("project-title-tag");
+            ptt.innerText = t.name;
+            ptt.addEventListener("click", function() {
+                projects.initByTitleTag(t.name);
+                prjs = projects.getActiveProjects();
+                populateProjects();
+            });
+            prj_title_tags.appendChild(ptt);
+        });
 
         //Project tags
         prj_tags.classList.add("project-tags");
@@ -111,21 +130,15 @@ function populateProjects() {
             });
             prj_tags.appendChild(pt);
         });
-        prj_title_tags.classList.add("project-title-tags");
 
-        //Title tag
-        let ptt = document.createElement("a");
-        ptt.classList.add("project-title-tag");
-        ptt.innerText = p.titleTags.type;
-        if (p.titleTags.subtype) ptt.innerText += " - " + p.titleTags.subtype;
-        ptt.style.color = "white";
-        prj_title_tags.appendChild(ptt);
 
         //Append elements
         prj_cont.appendChild(prj_tags);
+        prj_cont.appendChild(prj_det_title);
         prj_cont.appendChild(prj_det);
         prj_card.appendChild(prj_title);
         prj_card.appendChild(prj_title_tags);
+        prj_card.appendChild(prj_vid_block);
         prj_card.appendChild(prj_cont);
 
         //Sort types of projects

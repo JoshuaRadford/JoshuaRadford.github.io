@@ -17,16 +17,18 @@ class Project {
     tags;
     titleTags;
     details;
+    detailsTitle;
     imgPath;
     infoLink;
     playLink;
     downloadLink;
 
-    constructor(title, tags, titleTags, details, imgPath, infoLink, playLink, downloadLink) {
+    constructor(title, tags = [], titleTags = [], details, detailsTitle, imgPath, infoLink, playLink, downloadLink) {
         this.title = title;
         this.tags = tags;
         this.titleTags = titleTags;
         this.details = details;
+        this.detailsTitle = detailsTitle;
         this.imgPath = imgPath;
         this.infoLink = infoLink;
         this.playLink = playLink;
@@ -45,91 +47,42 @@ class Project {
 //Main
 function initAll() {
     let p_CHG = new Project("Changeling");
-    p_CHG.tags = [{
-            name: "Unreal Engine 4",
-            type: "engine"
-        },
-        {
-            name: "UI/UX Design",
-            type: "design"
-        },
-        {
-            name: "Perforce",
-            type: "source_control"
-        },
-        {
-            name: "Level Design",
-            type: "design"
-        },
-        {
-            name: "Documentation",
-            type: "documentation"
-        }
-    ];
-    p_CHG.titleTags = {
-        type: "Professional",
-        subtype: "Co-op/Internship",
-    }
-    p_CHG.details = "3D VR Mystery Game\n\nConcepted and completed a working prototype of one of several major levels from scratch alongside 3 other designers— which was but one team amongst 20+ developers, artists, and audio engineers.";
+    p_CHG.tags.push({ name: "Unreal Engine 4", type: "engine" });
+    p_CHG.tags.push({ name: "UI/UX Design", type: "design" });
+    p_CHG.tags.push({ name: "Perforce", type: "source_control" });
+    p_CHG.tags.push({ name: "Level Design", type: "design" });
+    p_CHG.tags.push({ name: "Documentation", type: "documentation" });
+    p_CHG.titleTags = [{ name: "Professional" }, { name: "Co-op/Internship" }, ];
+    p_CHG.detailsTitle = "3D VR Mystery Game";
+    p_CHG.details = "Concepted and completed a working prototype of one of several major levels from scratch alongside 3 other designers— which was but one team amongst 20+ developers, artists, and audio engineers.";
     p_CHG.imgPath = "assets/images/CHG.mp4";
     p_CHG.infoLink = "https://changelingvr.com";
     p_CHG.downloadLink = "https://drive.google.com/uc?export=download&confirm=vHz-&id=1w2UEVYL7vYth15NmXheoG46dfrbP4JVt";
 
     let p_II = new Project("Data Analysis: Income Inequality");
-    p_II.tags = [{
-            name: "Python",
-            type: "programming"
-        },
-        {
-            name: "Unity Engine",
-            type: "engine"
-        },
-        {
-            name: "C#",
-            type: "programming"
-        },
-        {
-            name: "Mapbox",
-            type: "tool"
-        }
-    ];
-    p_II.titleTags = {
-        type: "Personal",
-    };
-    p_II.details = "Unity Application\n\nParsed GeoJSON data correlated with multiple income inequality factors. Visualized results chronologically using Unity tools."
+    p_II.tags.push({ name: "Python", type: "programming" });
+    p_II.tags.push({ name: "Unity Engine", type: "engine" });
+    p_II.tags.push({ name: "C#", type: "programming" });
+    p_II.tags.push({ name: "Mapbox", type: "tool" });
+    p_II.titleTags = [{ name: "Personal", }];
+    p_II.detailsTitle = "Unity Application";
+    p_II.details = "Parsed GeoJSON data correlated with multiple income inequality factors. Visualized results chronologically using Unity tools."
     p_II.imgPath = "assets/images/II.mp4";
 
     let p_GSG = new Project("Greg, Son of Greg");
-    p_GSG.tags = [{
-            name: "Unity Engine",
-            type: "engine"
-        },
-        {
-            name: "C#",
-            type: "programming"
-        },
-        {
-            name: "UI/UX Design",
-            type: "design"
-        },
-        {
-            name: "Documentation",
-            type: "documentation"
-        },
-        {
-            name: "Procedural Generation",
-            type: "programming"
-        }
-    ];
-    p_GSG.titleTags = {
-        type: "Personal",
-    }
-    p_GSG.details = "Rogue-Like Dungeon-Crawler\n\nTackle procedurally generated dungeons where death is a means of progression as you pass on skills to your next of kin.";
+    p_GSG.tags.push({ name: "Unity Engine", type: "engine" });
+    p_GSG.tags.push({ name: "C#", type: "programming" });
+    p_GSG.tags.push({ name: "UI/UX Design", type: "design" });
+    p_GSG.tags.push({ name: "Documentation", type: "documentation" });
+    p_GSG.tags.push({ name: "Procedural Generation", type: "programming" });
+    p_GSG.titleTags = [{ name: "Personal", }, ];
+    p_GSG.detailsTitle = "Rogue-Like Dungeon-Crawler";
+    p_GSG.details = "Tackle procedurally generated dungeons where death is a means of progression as you pass on skills to your next of kin.";
     p_GSG.imgPath = "assets/images/GSG.mp4";
 
+    // Push all active projects, then sort by type
     activeProjects = [];
     activeProjects.push(p_CHG, p_II, p_GSG);
-
     activeProjects.forEach(p => { p.sortTagsByType(); });
     allProjects = activeProjects.slice();
 
@@ -148,19 +101,31 @@ function initByTag(tagName) {
     });
 }
 
+function initByTitleTag(tagName) {
+    activeProjects = [];
+    allProjects.forEach(p => {
+        for (let i = 0; i < p.titleTags.length; i++) {
+            if (p.titleTags[i].name == tagName) {
+                activeProjects.push(p);
+                break;
+            }
+        }
+    });
+}
+
 
 //Styling
 function getTagColor(tagType) {
     const tagColor = {
-        programming: "#ff652f",
-        design: "#e8c100",
-        engine: "#5479ff",
-        source_control: "#14a76c",
-        tool: "#856fff",
-        documentation: "#ba261e",
+        programming: "#A5402D",
+        design: "#44086E",
+        engine: "#3772FF",
+        source_control: "#7BAE37",
+        tool: "#F7B32B",
+        documentation: "#02040F",
     };
 
     return tagColor[tagType];
 }
 
-export { Project, getActiveProjects, getAllProjects, initAll, initByTag, getTagColor };
+export { Project, getActiveProjects, getAllProjects, initAll, initByTag, initByTitleTag, getTagColor };

@@ -1,4 +1,4 @@
-const themeColors = ["#ff652f", "#e8c100", "#14a76c", "#5479ff", "#856fff"];
+const themeColors = ["#390099", "#3772FF", "#20FC8F", "#F5E663", "#F7B32B", "#A5402D"];
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
