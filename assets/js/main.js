@@ -118,6 +118,8 @@ function populateProjects() {
 
         //Project tags
         prj_tags.classList.add("project-tags");
+        let pTagElements = [];
+        let hoveringTag = false;
         p.tags.forEach(t => {
             let pt = document.createElement("div");
             pt.classList.add("project-tag");
@@ -128,7 +130,25 @@ function populateProjects() {
                 prjs = projects.getActiveProjects();
                 populateProjects();
             });
+            pTagElements.push(pt);
             prj_tags.appendChild(pt);
+        });
+        // Highlight tag on hover, dehighlight other tags
+        pTagElements.forEach(t => {
+            t.addEventListener("mouseover", function() {
+                pTagElements.forEach(t => t.style.opacity = "50%");
+                t.style.opacity = "100%";
+                hoveringTag = true;
+            });
+            t.addEventListener("mouseleave", function() {
+                hoveringTag = false;
+                setTimeout(
+                    function() {
+                        if (hoveringTag == false)
+                            pTagElements.forEach(t => t.style.opacity = "100%");
+                    },
+                    200);
+            });
         });
 
 
