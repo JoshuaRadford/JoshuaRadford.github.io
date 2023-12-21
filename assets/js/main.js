@@ -1,15 +1,18 @@
-import * as projects from "./projects.js";
+import * as project from "./project.js";
 import * as utils from "./utils.js";
+import {getActiveProjects} from "./project.js";
 
 //Declarations
-let prjs;
+let projectList;
+let projectCardList;
 
 //Queries
-const prjs_section = document.querySelector(".projects-container");
-const scrollUp = document.querySelector("#scroll-up");
+let projectsSection = document.querySelector(".projects-container");
+let scrollUp = document.querySelector("#scroll-up");
 
 function init() {
-    prjs = projects.initAll();
+    projectList = project.init();
+    projectCardList = [];
     populateProjects();
 
     //Event Listeners
@@ -26,158 +29,173 @@ function init() {
 
 function updateStyling() {
     //Randomize text color of certain elements
-    const elems = [];
-    //elems.push(Array.from(document.querySelectorAll(".nav-link")));
-    //elems.push(Array.from(document.querySelectorAll("h2")));
-    //elems.push(Array.from(document.querySelectorAll("h3")));
+    let elems = [];
+    /* add elements here */
 
-    // Iterate these elements
     elems.forEach(e => {
         let colors = utils.themeColors.slice();
-        // Iterate nested elements
         e.forEach(n => {
             const rColor = colors[utils.getRandomInt(colors.length)];
             //Validates a 6-digit hex color or CSS color
             n.style.color = (/^#[0-9A-F]{6}$/i.test(rColor) || utils.isColor(rColor)) ? rColor : "#808080";
             colors.splice(colors.indexOf(rColor), 1);
-            if (colors.length == 0) colors = utils.themeColors.slice();
+            if (colors.length === 0) colors = utils.themeColors.slice();
         });
     });
 }
 
-function populateProjects() {
-    prjs_section.innerHTML = "";
-    let prjs_prof = document.createElement("div");
-    prjs_prof.classList.add("projects-subtype");
-    let prjs_pers = document.createElement("div");
-    prjs_pers.classList.add("projects-subtype");
+function HTMLDivElementFromProject(p){
+    //Initialize elements
+    let card = document.createElement("div");
+    let content = document.createElement("div");
+    let videoBlock = document.createElement("div");
+    let video = document.createElement("video");
+    let videoSource = document.createElement("source");
+    let title = document.createElement("h3");
+    let detailsTitle = document.createElement("div");
+    let details = document.createElement("p");
+    let tags = document.createElement("div");
+    let titleTags = document.createElement("div");
 
-    //Check if all projects are showing
-    let prjs_seeAll = document.querySelector("#projects-see-all");
-    prjs_seeAll.style.display = prjs.length < projects.getAllProjects().length ? "inline-block" : "none";
-    prjs_seeAll.addEventListener("click", function() {
-        prjs = projects.getAllProjects();
-        populateProjects();
+    card.classList.add("project-card", "dark-back");
+    content.classList.add("project-content");
+
+    //Video preview
+    video.className = "project-preview";
+    video.muted = true;
+    video.loop = true;
+    video.addEventListener("mouseover", function() {
+        this.play();
+    });
+    video.addEventListener("mouseleave", function() {
+        this.pause();
+        this.currentTime = 0;
     });
 
-    prjs.forEach(p => {
-        //Initialize elements
-        let prj_card = document.createElement("div");
-        let prj_cont = document.createElement("div");
-        let prj_vid_block = document.createElement("div");
-        let prj_vid = document.createElement("video");
-        let prj_vid_source = document.createElement("source");
-        let prj_title = document.createElement("h3");
-        let prj_det_title = document.createElement("div");
-        let prj_det = document.createElement("p");
-        let prj_tags = document.createElement("div");
-        let prj_title_tags = document.createElement("div");
+    //Other details
+    videoSource.src = p.imgPath;
+    videoSource.type = "video/mp4";
+    videoBlock.classList.add("project-preview-container");
+    title.classList.add("project-title");
+    title.innerText = p.title;
+    details.className = "project-details";
+    detailsTitle.innerText = p.detailsTitle;
+    detailsTitle.className = "project-details-title";
+    details.innerText = p.details;
 
-        prj_card.classList.add("project-card", "dark-back");
-        prj_cont.classList.add("project-content");
+    video.appendChild(videoSource);
+    videoBlock.appendChild(video);
 
-        //Video preview
-        prj_vid.className = "project-preview";
-        prj_vid.muted = true;
-        prj_vid.loop = true;
-        prj_vid.addEventListener("mouseover", function() {
-            this.play();
+    //Title tag
+    titleTags.classList.add("project-title-tags");
+    p.titleTags.forEach(t => {
+        let ptt = document.createElement("a");
+        ptt.classList.add("project-title-tag");
+        ptt.innerText = t.name;
+        ptt.addEventListener("click", function() {
+            project.initByTitleTag(t.name);
+            //projectList = project.getActiveProjects();
+            updateActiveProjects();
         });
-        prj_vid.addEventListener("mouseleave", function() {
-            this.pause();
-            this.currentTime = 0;
+        titleTags.appendChild(ptt);
+    });
+
+    //Project tags
+    tags.classList.add("project-tags");
+    let pTagElements = [];
+    let hoveringTag = false;
+    p.tags.forEach(t => {
+        let pt = document.createElement("div");
+        pt.classList.add("project-tag");
+        pt.innerText = t.name;
+        pt.style.backgroundColor = project.getTagColor(t.type);
+        pt.addEventListener("click", function() {
+            project.initByTag(t.name);
+            //projectList = project.getActiveProjects();
+            updateActiveProjects();
         });
-
-        //Other details
-        prj_vid_source.src = p.imgPath;
-        prj_vid_source.type = "video/mp4";
-        prj_vid_block.classList.add("project-preview-container");
-        prj_title.classList.add("project-title");
-        prj_title.innerText = p.title;
-        prj_det.className = "project-details";
-        prj_det_title.innerText = p.detailsTitle;
-        prj_det_title.className = "project-details-title";
-        prj_det.innerText = p.details;
-
-        prj_vid.appendChild(prj_vid_source);
-        prj_vid_block.appendChild(prj_vid);
-
-        //Title tag
-        prj_title_tags.classList.add("project-title-tags");
-        p.titleTags.forEach(t => {
-            let ptt = document.createElement("a");
-            ptt.classList.add("project-title-tag");
-            ptt.innerText = t.name;
-            ptt.addEventListener("click", function() {
-                projects.initByTitleTag(t.name);
-                prjs = projects.getActiveProjects();
-                populateProjects();
-            });
-            prj_title_tags.appendChild(ptt);
+        pTagElements.push(pt);
+        tags.appendChild(pt);
+    });
+    // Highlight tag on hover, de-highlight other tags
+    pTagElements.forEach(t => {
+        t.addEventListener("mouseover", function() {
+            pTagElements.forEach(t => t.style.opacity = "50%");
+            t.style.opacity = "100%";
+            hoveringTag = true;
         });
-
-        //Project tags
-        prj_tags.classList.add("project-tags");
-        let pTagElements = [];
-        let hoveringTag = false;
-        p.tags.forEach(t => {
-            let pt = document.createElement("div");
-            pt.classList.add("project-tag");
-            pt.innerText = t.name;
-            pt.style.backgroundColor = projects.getTagColor(t.type);
-            pt.addEventListener("click", function() {
-                projects.initByTag(t.name);
-                prjs = projects.getActiveProjects();
-                populateProjects();
-            });
-            pTagElements.push(pt);
-            prj_tags.appendChild(pt);
+        t.addEventListener("mouseleave", function() {
+            hoveringTag = false;
+            setTimeout(
+                function() {
+                    if (hoveringTag === false)
+                        pTagElements.forEach(t => t.style.opacity = "100%");
+                },
+                200);
         });
-        // Highlight tag on hover, dehighlight other tags
-        pTagElements.forEach(t => {
-            t.addEventListener("mouseover", function() {
-                pTagElements.forEach(t => t.style.opacity = "50%");
-                t.style.opacity = "100%";
-                hoveringTag = true;
-            });
-            t.addEventListener("mouseleave", function() {
-                hoveringTag = false;
-                setTimeout(
-                    function() {
-                        if (hoveringTag == false)
-                            pTagElements.forEach(t => t.style.opacity = "100%");
-                    },
-                    200);
-            });
-        });
+    });
 
 
-        //Append elements
-        prj_cont.appendChild(prj_tags);
-        prj_cont.appendChild(prj_det_title);
-        prj_cont.appendChild(prj_det);
-        prj_card.appendChild(prj_title);
-        prj_card.appendChild(prj_title_tags);
-        prj_card.appendChild(prj_vid_block);
-        prj_card.appendChild(prj_cont);
+    //Append elements
+    content.appendChild(tags);
+    content.appendChild(detailsTitle);
+    content.appendChild(details);
+    card.appendChild(title);
+    card.appendChild(titleTags);
+    card.appendChild(videoBlock);
+    card.appendChild(content);
+    p.htmlBlock = card;
+
+    return card
+}
+
+function updateActiveProjects(){
+    let ap = project.getActiveProjects()
+    let seeAllProjects = document.querySelector("#projects-see-all");
+    seeAllProjects.style.display = ap.length < project.getAllProjects().length ? "inline-block" : "none";
+
+    projectList.forEach(p => {
+        if(p.htmlBlock){
+            p.htmlBlock.style.display = ap.includes(p) ? "block" : "none";
+        }
+    });
+}
+
+function populateProjects() {
+    projectsSection.innerHTML = "";
+    let professionalProjectsSection = document.createElement("div");
+    professionalProjectsSection.classList.add("projects-subtype");
+    let personalProjectsSection = document.createElement("div");
+    personalProjectsSection.classList.add("projects-subtype");
+
+    //Check if all projects are showing
+    let seeAllProjects = document.querySelector("#projects-see-all");
+    seeAllProjects.style.display = projectList.length < project.getAllProjects().length ? "inline-block" : "none";
+    seeAllProjects.addEventListener("click", function() {
+        project.initAll();
+        updateActiveProjects();
+    });
+
+    projectList.forEach(p => {
+        let card = HTMLDivElementFromProject(p)
 
         //Sort types of projects
         switch (p.titleTags.type) {
             case "Professional":
-                prjs_prof.appendChild(prj_card);
+                professionalProjectsSection.appendChild(card);
                 break;
             case "Personal":
-                prjs_pers.appendChild(prj_card);
+                personalProjectsSection.appendChild(card);
                 break;
             default:
-                prjs_pers.appendChild(prj_card);
+                personalProjectsSection.appendChild(card);
                 break;
         }
 
-        prjs_section.appendChild(prjs_prof);
-        prjs_section.appendChild(prjs_pers);
-
+        projectsSection.appendChild(professionalProjectsSection);
+        projectsSection.appendChild(personalProjectsSection);
         updateStyling();
+        projectCardList.push(card)
     });
 }
 

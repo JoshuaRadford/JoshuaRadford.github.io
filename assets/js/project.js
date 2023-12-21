@@ -22,6 +22,7 @@ class Project {
     infoLink;
     playLink;
     downloadLink;
+    htmlBlock;
 
     constructor(title, tags = [], titleTags = [], details, detailsTitle, imgPath, infoLink, playLink, downloadLink) {
         this.title = title;
@@ -33,6 +34,7 @@ class Project {
         this.infoLink = infoLink;
         this.playLink = playLink;
         this.downloadLink = downloadLink;
+        this.htmlBlock = null
     }
 
     sortTagsByType() {
@@ -45,7 +47,7 @@ class Project {
 }
 
 //Main
-function initAll() {
+function init() {
     let p_CHG = new Project("Changeling");
     p_CHG.tags.push({ name: "Unreal Engine 4", type: "engine" });
     p_CHG.tags.push({ name: "UI/UX Design", type: "design" });
@@ -89,11 +91,15 @@ function initAll() {
     return activeProjects;
 }
 
+function initAll(){
+    activeProjects = allProjects;
+}
+
 function initByTag(tagName) {
     activeProjects = [];
     allProjects.forEach(p => {
         for (let i = 0; i < p.tags.length; i++) {
-            if (p.tags[i].name == tagName) {
+            if (p.tags[i].name === tagName) {
                 activeProjects.push(p);
                 break;
             }
@@ -105,7 +111,7 @@ function initByTitleTag(tagName) {
     activeProjects = [];
     allProjects.forEach(p => {
         for (let i = 0; i < p.titleTags.length; i++) {
-            if (p.titleTags[i].name == tagName) {
+            if (p.titleTags[i].name === tagName) {
                 activeProjects.push(p);
                 break;
             }
@@ -128,4 +134,4 @@ function getTagColor(tagType) {
     return tagColor[tagType];
 }
 
-export { Project, getActiveProjects, getAllProjects, initAll, initByTag, initByTitleTag, getTagColor };
+export { Project, getActiveProjects, getAllProjects, init, initAll, initByTag, initByTitleTag, getTagColor };
