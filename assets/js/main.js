@@ -1,17 +1,21 @@
 import * as project from "./project.js";
 import * as utils from "./utils.js";
-import {getActiveProjects} from "./project.js";
 
-//Declarations
+// Project data
 let projectList;
+let activeProjectList;
 let projectCardList;
 
-//Queries
+// Queries
 let projectsSection = document.querySelector(".projects-container");
 let scrollUp = document.querySelector("#scroll-up");
 
+/**
+ * Initialize project data and page-wide elements.
+ */
 function init() {
     projectList = project.init();
+    activeProjectList = projectList;
     projectCardList = [];
     populateProjects();
 
@@ -44,8 +48,14 @@ function updateStyling() {
     });
 }
 
+/**
+ * Creates and fills an HTML element based on the details of a given Project.
+ * @param p The project to create from.
+ * @returns {HTMLDivElement} The parent div block.
+ * @constructor
+ */
 function HTMLDivElementFromProject(p){
-    //Initialize elements
+    // Initialize elements
     let card = document.createElement("div");
     let content = document.createElement("div");
     let videoBlock = document.createElement("div");
@@ -72,7 +82,7 @@ function HTMLDivElementFromProject(p){
         this.currentTime = 0;
     });
 
-    //Other details
+    // Other details
     videoSource.src = p.imgPath;
     videoSource.type = "video/mp4";
     videoBlock.classList.add("project-preview-container");
@@ -86,21 +96,20 @@ function HTMLDivElementFromProject(p){
     video.appendChild(videoSource);
     videoBlock.appendChild(video);
 
-    //Title tag
+    // Title tag
     titleTags.classList.add("project-title-tags");
     p.titleTags.forEach(t => {
-        let ptt = document.createElement("a");
+        let ptt = document.createElement("div");
         ptt.classList.add("project-title-tag");
         ptt.innerText = t.name;
         ptt.addEventListener("click", function() {
-            project.initByTitleTag(t.name);
-            //projectList = project.getActiveProjects();
-            updateActiveProjects();
+            activeProjectList = project.getByTitleTag(projectList, t.name);
+            visualizeActiveProjects(t.name, true);
         });
         titleTags.appendChild(ptt);
     });
 
-    //Project tags
+    // Project tags
     tags.classList.add("project-tags");
     let pTagElements = [];
     let hoveringTag = false;
@@ -108,11 +117,10 @@ function HTMLDivElementFromProject(p){
         let pt = document.createElement("div");
         pt.classList.add("project-tag");
         pt.innerText = t.name;
-        pt.style.backgroundColor = project.getTagColor(t.type);
+        //pt.style.backgroundColor = project.getTagColor(t.type);
         pt.addEventListener("click", function() {
-            project.initByTag(t.name);
-            //projectList = project.getActiveProjects();
-            updateActiveProjects();
+            activeProjectList = project.getByTag(projectList, t.name);
+            visualizeActiveProjects(t.name, true);
         });
         pTagElements.push(pt);
         tags.appendChild(pt);
@@ -120,7 +128,9 @@ function HTMLDivElementFromProject(p){
     // Highlight tag on hover, de-highlight other tags
     pTagElements.forEach(t => {
         t.addEventListener("mouseover", function() {
-            pTagElements.forEach(t => t.style.opacity = "50%");
+            pTagElements.forEach(t => {
+                t.style.opacity = "75%";
+            });
             t.style.opacity = "100%";
             hoveringTag = true;
         });
@@ -128,58 +138,86 @@ function HTMLDivElementFromProject(p){
             hoveringTag = false;
             setTimeout(
                 function() {
-                    if (hoveringTag === false)
+                    if (hoveringTag === false) {
                         pTagElements.forEach(t => t.style.opacity = "100%");
+                    }
                 },
                 200);
         });
     });
 
 
-    //Append elements
-    content.appendChild(tags);
+    // Append elements
     content.appendChild(detailsTitle);
     content.appendChild(details);
-    card.appendChild(title);
-    card.appendChild(titleTags);
     card.appendChild(videoBlock);
+    card.appendChild(title);
     card.appendChild(content);
+    content.appendChild(tags);
+    content.appendChild(titleTags);
     p.htmlBlock = card;
 
     return card
 }
 
-function updateActiveProjects(){
-    let ap = project.getActiveProjects()
+/**
+ * Hide non-active projects.
+ */
+function visualizeActiveProjects(tagName, resetTags = false){
     let seeAllProjects = document.querySelector("#projects-see-all");
-    seeAllProjects.style.display = ap.length < project.getAllProjects().length ? "inline-block" : "none";
+    seeAllProjects.style.display = activeProjectList.length < projectList.length ? "inline-block" : "none";
 
     projectList.forEach(p => {
         if(p.htmlBlock){
-            p.htmlBlock.style.display = ap.includes(p) ? "block" : "none";
+            p.htmlBlock.style.display = activeProjectList.includes(p) ? "block" : "none";
+        }
+        if(resetTags){
+            p.htmlBlock.querySelectorAll(".project-tag").forEach(t => {
+                t.style = window.getComputedStyle(t);
+            });
+            p.htmlBlock.querySelectorAll(".project-title-tag").forEach(t => {
+                t.style = window.getComputedStyle(t);
+            });
         }
     });
+
+    activeProjectList.forEach(p => {
+        p.htmlBlock.querySelectorAll(".project-tag").forEach(t => {
+            if(t.innerText === tagName){
+                t.style.color = "#B37D00";
+            }
+        })
+        p.htmlBlock.querySelectorAll(".project-title-tag").forEach(t => {
+            if(t.innerText === tagName){
+                t.style.color = "#B37D00";
+            }
+        })
+    })
 }
 
+/**
+ * Clear and refill the projects section.
+ */
 function populateProjects() {
-    projectsSection.innerHTML = "";
     let professionalProjectsSection = document.createElement("div");
-    professionalProjectsSection.classList.add("projects-subtype");
     let personalProjectsSection = document.createElement("div");
+
+    projectsSection.innerHTML = "";
+    professionalProjectsSection.classList.add("projects-subtype");
     personalProjectsSection.classList.add("projects-subtype");
 
-    //Check if all projects are showing
+    // Option to show all projects
     let seeAllProjects = document.querySelector("#projects-see-all");
-    seeAllProjects.style.display = projectList.length < project.getAllProjects().length ? "inline-block" : "none";
+    seeAllProjects.style.display = activeProjectList.length < projectList.length ? "inline-block" : "none";
     seeAllProjects.addEventListener("click", function() {
-        project.initAll();
-        updateActiveProjects();
+        activeProjectList = projectList;
+        visualizeActiveProjects(null, true);
     });
 
     projectList.forEach(p => {
         let card = HTMLDivElementFromProject(p)
 
-        //Sort types of projects
+        // Sort types of projects
         switch (p.titleTags.type) {
             case "Professional":
                 professionalProjectsSection.appendChild(card);
@@ -195,6 +233,7 @@ function populateProjects() {
         projectsSection.appendChild(professionalProjectsSection);
         projectsSection.appendChild(personalProjectsSection);
         updateStyling();
+
         projectCardList.push(card)
     });
 }
