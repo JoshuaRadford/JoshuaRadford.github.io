@@ -9,7 +9,8 @@ const tagColor = {
     documentation: "#02040F",
 };
 
-class Project {
+class Project
+{
     title;
     tags;
     titleTags;
@@ -21,12 +22,13 @@ class Project {
     downloadLink;
     htmlBlock;
 
-    constructor(title, tags = [], titleTags = [], details, detailsTitle, imgPath, infoLink, playLink, downloadLink) {
+    constructor(title, tags = [], titleTags = [], details, subtitle, imgPath, infoLink, playLink, downloadLink)
+    {
         this.title = title;
         this.tags = tags;
         this.titleTags = titleTags;
         this.details = details;
-        this.detailsTitle = detailsTitle;
+        this.subtitle = subtitle;
         this.imgPath = imgPath;
         this.infoLink = infoLink;
         this.playLink = playLink;
@@ -34,8 +36,10 @@ class Project {
         this.htmlBlock = null
     }
 
-    sortTagsByType() {
-        this.tags.sort(function(a, b) {
+    sortTagsByType()
+    {
+        this.tags.sort(function (a, b)
+        {
             if (a.type < b.type) return -1;
             if (a.type > b.type) return 1;
             return 0;
@@ -43,7 +47,8 @@ class Project {
     }
 }
 
-function init() {
+function init()
+{
     let p1 = new Project("Changeling");
     p1.tags = [
         { name: "Unreal Engine 4", type: "engine" },
@@ -72,7 +77,7 @@ function init() {
     p2.titleTags = [
         { name: "Personal", }
     ].sort();
-    p2.detailsTitle = "Unity Application";
+    p2.subtitle = "Unity Application";
     p2.details = "Parsed GeoJSON data correlated with multiple income inequality factors. Visualized results chronologically using Unity tools."
     p2.imgPath = "assets/images/II.mp4";
 
@@ -87,7 +92,7 @@ function init() {
     p3.titleTags = [
         { name: "Personal", },
     ].sort();
-    p3.detailsTitle = "Rogue-Like Dungeon-Crawler";
+    p3.subtitle = "Rogue-Like Dungeon-Crawler";
     p3.details = "Tackle procedurally generated dungeons where death is a means of progression as you pass on skills to your next of kin.";
     p3.imgPath = "assets/images/GSG.mp4";
 
@@ -104,11 +109,15 @@ function init() {
  * @param tagName Project tag to check.
  * @returns {*[]} List of projects with this tag.
  */
-function getByTag(projects, tagName){
+function getByTag(projects, tagName)
+{
     let projectList = [];
-    projects.forEach(p => {
-        for (let i = 0; i < p.tags.length; i++) {
-            if (p.tags[i].name === tagName) {
+    projects.forEach(p =>
+    {
+        for (let i = 0; i < p.tags.length; i++)
+        {
+            if (p.tags[i].name === tagName)
+            {
                 projectList.push(p);
                 break;
             }
@@ -123,11 +132,15 @@ function getByTag(projects, tagName){
  * @param tagName Project title tag to check.
  * @returns {*[]} List of projects with this title tag.
  */
-function getByTitleTag(projects, tagName) {
+function getByTitleTag(projects, tagName)
+{
     let projectList = [];
-    projects.forEach(p => {
-        for (let i = 0; i < p.titleTags.length; i++) {
-            if (p.titleTags[i].name === tagName) {
+    projects.forEach(p =>
+    {
+        for (let i = 0; i < p.titleTags.length; i++)
+        {
+            if (p.titleTags[i].name === tagName)
+            {
                 projectList.push(p);
                 break;
             }
@@ -141,7 +154,8 @@ function getByTitleTag(projects, tagName) {
  * @param tagType Project tag to check.
  * @returns {*|string} Hex color from the table.
  */
-function getTagColor(tagType) {
+function getTagColor(tagType)
+{
     return (tagType in tagColor) ? tagColor[tagType] : "#FFFFFF";
 }
 
