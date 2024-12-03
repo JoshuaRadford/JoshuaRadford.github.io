@@ -1,0 +1,2 @@
+command prompt:
+    http-server

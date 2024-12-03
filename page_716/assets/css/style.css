@@ -1,0 +1,107 @@
+@import url("/page_home/assets/css/style.css");
+
+.ui-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+}
+
+.ui-subgroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.1rem solid var(--text-color-secondary);
+    color: white;
+    padding: 1rem;
+}
+
+.ui-button {
+    all: unset;
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--header-color);
+    color: white;
+    border: 0.2rem solid var(--text-color-secondary);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.ui-button:hover {
+    border-color: var(--color-secondary);
+}
+
+.ui-label {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--header-color);
+    color: white;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1rem;
+    margin: 0.5rem;
+    background: var(--header-color);
+    outline: var(--text-color-secondary) solid 0.2rem;
+    opacity: 1.0;
+    -webkit-transition: 0.2s;
+    transition: all 0.2s;
+}
+
+.slider-output {
+    height: auto;
+    width: 4rem;
+    margin: 0.5rem;
+    padding: 0.25rem;
+    text-align: center;
+    background-color: var(--header-color);
+    color: white;
+}
+
+.no-selection {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+
+#x-range, #z-range {
+    padding: 0.5rem;
+    width: 4rem;
+}
+
+#start-button {
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
+}
+
+#ui-container {
+    margin: 2rem;
+}
+
+#scene-wrapper {
+    margin: 4rem;
+}
+
+#scene-container {
+    margin: auto;
+    border: 1rem solid var(--header-color);
+    box-sizing: content-box;
+}
