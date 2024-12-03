@@ -53,3 +53,5 @@ let perlin = {
     }
 }
 perlin.seed();
+
+export { perlin };

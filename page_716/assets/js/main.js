@@ -3,7 +3,7 @@ import * as utils from './utils.js';
 import * as THREE from "three";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import './delaunay.js';
-import "./perlin.js";
+import * as perlin from './perlin.js';
 
 class SceneManager
 {
@@ -94,7 +94,7 @@ class SceneManager
 
     createStartingTerrain()
     {
-        perlin.seed();
+        perlin.perlin.seed();
         let points = this.generateRandomPoints();
         this.setPoints(...points);
         this.setTerrain();
@@ -238,7 +238,7 @@ class SceneManager
     {
         let x = point.x;
         let z = point.z;
-        let y = perlin.get(
+        let y = perlin.perlin.get(
             x / 100 * this.perlinScale / 10,
             z / 100 * this.perlinScale / 10
         ) * this.perlinScale;
