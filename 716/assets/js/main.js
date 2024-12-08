@@ -9,15 +9,18 @@ class SceneManager
 {
     constructor(containerId, width = 1000, height = 600)
     {
+        // container
         this.container = document.getElementById(containerId);
         this.width = width;
         this.height = height;
         this.container.style.width = `${this.width}px`;
         this.container.style.height = `${this.height}px`;
+
+        // three.js features
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(
             75,
-            width / height,
+            this.width / this.height,
             0.1,
             100_000
         );
@@ -58,14 +61,17 @@ class SceneManager
         this.terrainMesh = null
         this.pointObjects = null;
         this.points = [];
+        this.noiseGenerator = null;
+
+        // UI variables
         this.editMode = false;
-        this.perlinScale = 25;
         this.xRange = 100;
         this.zRange = 100;
         this.initPointCount = 1_000;
         this.showTexture = false;
         this.showPoints = true;
 
+        // UI elements
         this.startButton = document.getElementById("start-button");
         this.editModeButton = document.getElementById("edit-mode-button");
         this.xRangeSlider = document.getElementById("x-range-slider");
@@ -76,20 +82,48 @@ class SceneManager
         this.initPointCountSliderOutput = document.getElementById("point-count-slider-output");
         this.toggleWireframeCheckbox = document.getElementById("toggle-wireframe");
         this.toggleShowPointsCheckbox = document.getElementById("toggle-show-points");
-        this.perlinSlider = document.getElementById("perlin-slider");
-        this.perlinSliderOutput = document.getElementById("perlin-slider-output");
+        this.perlinOctavesSlider = document.getElementById("perlin-octaves-slider");
+        this.perlinOctavesSliderOutput = document.getElementById("perlin-octaves-slider-output");
+        this.perlinAmplitudeSlider = document.getElementById("perlin-amplitude-slider");
+        this.perlinAmplitudeSliderOutput = document.getElementById("perlin-amplitude-slider-output");
+        this.perlinFrequencySlider = document.getElementById("perlin-frequency-slider");
+        this.perlinFrequencySliderOutput = document.getElementById("perlin-frequency-slider-output");
+        this.perlinPersistenceSlider = document.getElementById("perlin-persistence-slider");
+        this.perlinPersistenceSliderOutput = document.getElementById("perlin-persistence-slider-output");
+        this.perlinLacunaritySlider = document.getElementById("perlin-lacunarity-slider");
+        this.perlinLacunaritySliderOutput = document.getElementById("perlin-lacunarity-slider-output");
         this.setupInputListener();
 
+        this.noiseConfigs = {
+            octaves: this.perlinOctavesSlider.value,
+            amplitude: this.perlinAmplitudeSlider.value,
+            frequency: this.perlinFrequencySlider.value,
+            persistance: this.perlinPersistenceSlider.value,
+            lacunarity: this.perlinLacunaritySlider.value
+        }
+
+        // orient scene
         this.plane = new THREE.Mesh(this.planeGeometry, this.planeMaterial);
         this.plane.rotation.x = -Math.PI / 2;
         this.scene.add(this.plane);
 
         this.renderer.setClearColor(0x333333);
-        this.renderer.setSize(width, height);
+        this.renderer.setSize(this.width, this.height);
         this.container.appendChild(this.renderer.domElement);
 
         this.initLighting();
         this.setCameraOrientation();
+    }
+
+    resize()
+    {
+        let wrapper = document.getElementById("scene-wrapper");
+        this.width = wrapper.clientWidth;
+        this.height = wrapper.clientHeight;
+        this.container.style.width = `${this.width}px`;
+        this.container.style.height = `${this.height}px`;
+        this.camera.aspect = this.width / this.height;
+        this.renderer.setSize(this.width, this.height);
     }
 
     createStartingTerrain()
@@ -151,6 +185,18 @@ class SceneManager
         this.points = newPoints;
     }
 
+    pointToPerlin(point)
+    {
+        let x = point.x;
+        let z = point.z;
+        /*let y = perlin.perlin.get(
+            x / 100 * this.perlinAmplitudeSlider.value / 10,
+            z / 100 * this.perlinAmplitudeSlider.value / 10
+        ) * this.perlinAmplitudeSlider.value;*/
+        let y = perlin.perlin.getWithConfigs(x, z, this.noiseConfigs);
+        return new THREE.Vector3(x, y, z);
+    }
+
     addMesh(material, triangles)
     {
         let { v: vertices, i: indices } = this.generateVerticesAndIndices(triangles);
@@ -193,7 +239,7 @@ class SceneManager
         let formattedPoints = points.map(p => [p.x, p.z]);
         let dela = new Delaunay(formattedPoints);
         let triangles = dela.triangulate();
-        console.log(triangles);
+        // console.log(triangles);
         return triangles;
     }
 
@@ -234,17 +280,6 @@ class SceneManager
         return points;
     }
 
-    pointToPerlin(point)
-    {
-        let x = point.x;
-        let z = point.z;
-        let y = perlin.perlin.get(
-            x / 100 * this.perlinScale / 10,
-            z / 100 * this.perlinScale / 10
-        ) * this.perlinScale;
-        return new THREE.Vector3(x, y, z);
-    }
-
     getPointRange()
     {
         let xMin, xMax, yMin, yMax;
@@ -260,6 +295,11 @@ class SceneManager
 
     setupInputListener()
     {
+        window.addEventListener("resize", (event) =>
+        {
+            this.resize();
+        });
+
         this.container.addEventListener('dblclick', (event) =>
         {
             if (!this.editMode)
@@ -309,11 +349,47 @@ class SceneManager
             this.container.style.borderColor = this.editMode ? c2 : hc;
         });
 
-        this.perlinSliderOutput.innerHTML = this.perlinSlider.value;
-        this.perlinSlider.addEventListener("input", (event) =>
+        this.perlinOctavesSliderOutput.innerHTML = this.perlinOctavesSlider.value;
+        this.perlinOctavesSlider.addEventListener("input", (event) =>
         {
-            this.perlinSliderOutput.innerHTML = event.target.value;
-            this.perlinScale = event.target.value;
+            this.perlinOctavesSliderOutput.innerHTML = event.target.value;
+            this.noiseConfigs.octaves = event.target.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        })
+        this.perlinAmplitudeSliderOutput.innerHTML = this.perlinAmplitudeSlider.value;
+        this.perlinAmplitudeSlider.addEventListener("input", (event) =>
+        {
+            this.perlinAmplitudeSliderOutput.innerHTML = event.target.value;
+            this.noiseConfigs.amplitude = event.target.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
+        this.perlinFrequencySliderOutput.innerHTML = this.perlinFrequencySlider.value;
+        this.perlinFrequencySlider.addEventListener("input", (event) =>
+        {
+            this.perlinFrequencySliderOutput.innerHTML = event.target.value;
+            this.noiseConfigs.frequency = event.target.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
+        this.perlinPersistenceSliderOutput.innerHTML = this.perlinPersistenceSlider.value;
+        this.perlinPersistenceSlider.addEventListener("input", (event) =>
+        {
+            this.perlinPersistenceSliderOutput.innerHTML = event.target.value;
+            this.noiseConfigs.persistance = event.target.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
+        this.perlinLacunaritySliderOutput.innerHTML = this.perlinLacunaritySlider.value;
+        this.perlinLacunaritySlider.addEventListener("input", (event) =>
+        {
+            this.perlinLacunaritySliderOutput.innerHTML = event.target.value;
+            this.noiseConfigs.lacunarity = event.target.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
@@ -346,22 +422,54 @@ class SceneManager
             this.initPointCount = event.target.value;
         });
 
-        this.toggleWireframeCheckbox.checked = this.showTexture;
-        this.terrainMaterial = (this.showTexture) ? this.standardMaterial : this.wireframeMaterial;
-        this.toggleWireframeCheckbox.addEventListener("change", (event) =>
+        this.toggleWireframeCheckbox.addEventListener("click", (event) =>
         {
-            this.showTexture = this.toggleWireframeCheckbox.checked;
+            this.showTexture = !this.showTexture;
+            if (this.showTexture)
+            {
+                this.toggleWireframeCheckbox.classList.add("toggle-active");
+            }
+            else
+            {
+                this.toggleWireframeCheckbox.classList.remove("toggle-active");
+            }
             this.terrainMaterial = (this.showTexture) ? this.standardMaterial : this.wireframeMaterial;
             this.setTerrain();
         });
-
-        this.toggleShowPointsCheckbox.checked = this.showPoints;
-        this.toggleShowPointsCheckbox.addEventListener("change", (event) =>
+        if (this.showTexture)
         {
-            this.showPoints = this.toggleShowPointsCheckbox.checked;
+            this.toggleWireframeCheckbox.classList.add("toggle-active");
+        }
+        else
+        {
+            this.toggleWireframeCheckbox.classList.remove("toggle-active");
+        }
+        this.terrainMaterial = (this.showTexture) ? this.standardMaterial : this.wireframeMaterial;
+        this.setTerrain();
+
+        this.toggleShowPointsCheckbox.addEventListener("click", (event) =>
+        {
+            this.showPoints = !this.showPoints;
+            if (this.showPoints)
+            {
+                this.toggleShowPointsCheckbox.classList.add("toggle-active");
+            }
+            else
+            {
+                this.toggleShowPointsCheckbox.classList.remove("toggle-active");
+            }
             this.setPoints(...this.points);
         });
+        if (this.showPoints)
+        {
+            this.toggleShowPointsCheckbox.classList.add("toggle-active");
+        }
+        else
+        {
+            this.toggleShowPointsCheckbox.classList.remove("toggle-active");
+        }
     }
+
 
     animate()
     {
@@ -373,9 +481,11 @@ class SceneManager
 
 function init()
 {
+    const wrapperId = 'scene-wrapper';
     const containerId = 'scene-container';
+    let wrapper = document.getElementById(wrapperId);
     let container = document.getElementById(containerId);
-    const sceneManager = new SceneManager(containerId);
+    const sceneManager = new SceneManager(containerId, wrapper.clientWidth, wrapper.clientHeight);
 }
 
 export { init, SceneManager };

@@ -1,5 +1,4 @@
 // https://github.com/joeiddon/perlin
-
 'use strict';
 let perlin = {
     rand_vect: function ()
@@ -48,8 +47,32 @@ let perlin = {
         let xt = this.interp(x - xf, tl, tr);
         let xb = this.interp(x - xf, bl, br);
         let v = this.interp(y - yf, xt, xb);
+
         this.memory[[x, y]] = v;
         return v;
+    },
+    getWithConfigs: function (x, y, configs = {
+        octaves: 1,
+        amplitude: 50,
+        frequency: 1,
+        persistance: 0.5,
+        lacunarity: 2
+    })
+    {
+        let value = 0;
+        let octaves = parseInt(configs.octaves);
+        let frequency = parseFloat(configs.frequency);
+        let amplitude = parseInt(configs.amplitude);
+        let persistance = parseFloat(configs.persistance);
+        let lacunarity = parseFloat(configs.lacunarity);
+        for (let i = 0; i < octaves; i++)
+        {
+            value += amplitude * this.get(x * frequency, y * frequency);
+            amplitude *= persistance;
+            frequency *= lacunarity;
+        }
+
+        return value;
     }
 }
 perlin.seed();

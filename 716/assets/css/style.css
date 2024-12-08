@@ -1,4 +1,28 @@
-@import url("/page_home/assets/css/style.css");
+@import url("/home/assets/css/style.css");
+
+
+#content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-wrap: wrap;
+    height: 50rem;
+    width: 100%;
+}
+
+#scene-wrapper {
+    margin: 4rem;
+    height: 100%;
+    min-width: 40%;
+}
+
+#scene-container {
+    margin: auto;
+    border: 1rem solid var(--header-color);
+    box-sizing: content-box;
+}
 
 .ui-container {
     display: flex;
@@ -42,7 +66,7 @@
     color: white;
 }
 
-.slider-container {
+.ui-element-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -74,6 +98,40 @@
     color: white;
 }
 
+.toggle {
+    position: relative;
+    width: 2rem;
+    height: 1rem;
+    border: 0.1rem solid red;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.circle {
+    position: absolute;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 1rem;
+    background-color: red;
+    transition: 0.3s;
+}
+
+.toggle-active {
+    border-color: green;
+}
+
+.toggle-active .circle {
+    left: 100%;
+    transform: translateX(-100%);
+    transition: 0.3s;
+    background-color: green;
+}
+
 .no-selection {
     user-select: none;
     -webkit-user-select: none;
@@ -94,21 +152,4 @@
 
 #ui-container {
     margin: 2rem;
-}
-
-#content-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#scene-wrapper {
-    margin: 4rem;
-}
-
-#scene-container {
-    margin: auto;
-    border: 1rem solid var(--header-color);
-    box-sizing: content-box;
 }
