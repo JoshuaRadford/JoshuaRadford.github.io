@@ -102,7 +102,7 @@
     position: relative;
     width: 2rem;
     height: 1rem;
-    border: 0.1rem solid red;
+    border: 0.2rem solid var(--text-color-secondary);
     border-radius: 1rem;
     display: flex;
     justify-content: center;
@@ -117,19 +117,19 @@
     width: 1rem;
     height: 1rem;
     border-radius: 1rem;
-    background-color: red;
+    background-color: var(--highlight-color);
     transition: 0.3s;
 }
 
 .toggle-active {
-    border-color: green;
+    border: 0.2rem solid var(--color-secondary);
 }
 
 .toggle-active .circle {
     left: 100%;
     transform: translateX(-100%);
     transition: 0.3s;
-    background-color: green;
+    background-color: var(--active-color);
 }
 
 .no-selection {
