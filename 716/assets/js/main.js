@@ -262,9 +262,9 @@ class SceneManager
 
     generateRandomPoints(n = this.initPointCount, xRange = this.xRange, zRange = this.zRange)
     {
-        n = Math.abs(n);
-        xRange = Math.abs(xRange);
-        zRange = Math.abs(zRange);
+        n = Math.abs(parseInt(n));
+        xRange = Math.abs(parseInt(xRange));
+        zRange = Math.abs(parseInt(zRange));
         let points = [];
         for (let i = 0; i < n; i++)
         {
@@ -357,12 +357,28 @@ class SceneManager
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
-        })
+        });
+        this.perlinOctavesSliderOutput.addEventListener("input", (event) =>
+        {
+            this.perlinOctavesSlider.value = event.target.value;
+            this.noiseConfigs.octaves = this.perlinOctavesSlider.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
         this.perlinAmplitudeSliderOutput.value = this.perlinAmplitudeSlider.value;
         this.perlinAmplitudeSlider.addEventListener("input", (event) =>
         {
             this.perlinAmplitudeSliderOutput.value = event.target.value;
             this.noiseConfigs.amplitude = event.target.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
+        this.perlinAmplitudeSliderOutput.addEventListener("input", (event) =>
+        {
+            this.perlinAmplitudeSlider.value = event.target.value;
+            this.noiseConfigs.amplitude = this.perlinAmplitudeSlider.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
@@ -376,11 +392,27 @@ class SceneManager
             this.setPoints(...this.points);
             this.setTerrain();
         });
+        this.perlinFrequencySliderOutput.addEventListener("input", (event) =>
+        {
+            this.perlinFrequencySlider.value = event.target.value;
+            this.noiseConfigs.frequency = this.perlinFrequencySlider.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
         this.perlinPersistenceSliderOutput.value = this.perlinPersistenceSlider.value;
         this.perlinPersistenceSlider.addEventListener("input", (event) =>
         {
             this.perlinPersistenceSliderOutput.value = event.target.value;
             this.noiseConfigs.persistance = event.target.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
+        this.perlinPersistenceSliderOutput.addEventListener("input", (event) =>
+        {
+            this.perlinPersistenceSlider.value = event.target.value;
+            this.noiseConfigs.persistance = this.perlinPersistenceSlider.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
@@ -394,11 +426,24 @@ class SceneManager
             this.setPoints(...this.points);
             this.setTerrain();
         });
+        this.perlinLacunaritySliderOutput.addEventListener("input", (event) =>
+        {
+            this.perlinLacunaritySlider.value = event.target.value;
+            this.noiseConfigs.lacunarity = this.perlinLacunaritySlider.value;
+            this.applyPerlinToPoints();
+            this.setPoints(...this.points);
+            this.setTerrain();
+        });
 
         this.xRangeSliderOutput.value = this.xRangeSlider.value;
         this.xRangeSlider.addEventListener("input", (event) =>
         {
             this.xRangeSliderOutput.value = event.target.value;
+            this.xRange = event.target.value;
+        });
+        this.xRangeSliderOutput.addEventListener("input", (event) =>
+        {
+            this.xRangeSlider.value = event.target.value;
             this.xRange = event.target.value;
         });
 
@@ -408,6 +453,11 @@ class SceneManager
             this.zRangeSliderOutput.value = event.target.value;
             this.zRange = event.target.value;
         });
+        this.zRangeSliderOutput.addEventListener("input", (event) =>
+        {
+            this.zRangeSlider.value = event.target.value;
+            this.zRange = event.target.value;
+        });
 
         this.initPointCountSliderOutput.value = this.initPointCountSlider.value;
         this.initPointCountSlider.addEventListener("input", (event) =>
@@ -415,7 +465,6 @@ class SceneManager
             this.initPointCountSliderOutput.value = event.target.value;
             this.initPointCount = event.target.value;
         });
-
         this.initPointCountSliderOutput.addEventListener("input", (event) =>
         {
             this.initPointCountSlider.value = event.target.value;
