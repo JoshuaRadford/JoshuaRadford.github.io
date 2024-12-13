@@ -8,12 +8,11 @@
     align-items: center;
     margin: auto;
     flex-wrap: wrap;
-    height: 50rem;
-    width: 100%;
+    padding: 5rem;
 }
 
 #scene-wrapper {
-    margin: 4rem;
+    margin: 1rem;
     height: 100%;
     min-width: 40%;
 }
@@ -21,7 +20,7 @@
 #scene-container {
     margin: auto;
     border: 1rem solid var(--header-color);
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 
 .ui-container {
@@ -30,16 +29,18 @@
     align-items: center;
     justify-content: center;
     background-color: var(--background-color);
+    font-size: 1rem;
+    margin: 1rem;
 }
 
 .ui-subgroup {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border: 0.1rem solid var(--text-color-secondary);
     color: white;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .ui-button {
@@ -71,7 +72,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 }
@@ -80,7 +80,7 @@
     -webkit-appearance: none;
     appearance: none;
     height: 1rem;
-    margin: 0.5rem;
+    margin: 0.25rem;
     background: var(--header-color);
     outline: var(--text-color-secondary) solid 0.2rem;
     opacity: 1.0;
@@ -91,7 +91,8 @@
 .slider-output {
     height: auto;
     width: 4rem;
-    margin: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     padding: 0.25rem;
     text-align: center;
     background-color: var(--header-color);
@@ -151,5 +152,5 @@
 }
 
 #ui-container {
-    margin: 2rem;
+    margin: auto;
 }
