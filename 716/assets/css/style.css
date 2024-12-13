@@ -1,6 +1,35 @@
 @import url("../../../home/assets/css/style.css");
 
 
+#main-description {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1rem;
+}
+
+#presentation-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    font-size: 1.5rem;
+}
+
+#presentation-links a {
+    margin: 0.5rem;
+    text-decoration: underline;
+    color: var(--color-secondary);
+}
+
+#presentation-links a:hover {
+    color: var(--highlight-color);
+}
+
+#presentation-links a:active {
+    color: var(--active-color);
+}
+
 #content-wrapper {
     display: flex;
     flex-direction: row;
@@ -16,12 +45,35 @@
     height: 100%;
     min-width: 40%;
     margin: auto;
+    border: 1rem solid var(--header-color);
+    box-sizing: content-box;
 }
 
 #scene-container {
     margin: auto;
-    border: 1rem solid var(--header-color);
-    box-sizing: border-box;
+}
+
+#instructions .ui-subgroup {
+    padding: 2rem;
+    font-size: 1.5rem;
+}
+
+*>ol, *>ul {
+    margin-left: 2rem;
+}
+
+#instructions li {
+    margin: 0.5rem;
+}
+
+#instructions ul {
+    list-style-type: circle;
+}
+
+.highlight {
+    font-weight: bold;
+    font-style: italic;
+    color: var(--text-color-secondary)
 }
 
 .ui-container {
@@ -30,14 +82,14 @@
     align-items: center;
     justify-content: center;
     background-color: var(--background-color);
-    font-size: 1rem;
+    font-size: var(--font-size);
 }
 
 .ui-subgroup {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: space-evenly;
     border: 0.1rem solid var(--text-color-secondary);
     color: white;
     padding: 0.5rem;
@@ -97,6 +149,8 @@
     text-align: center;
     background-color: var(--header-color);
     color: white;
+    font-family: var(--header-font-family);
+    font-size: var(--font-size);
 }
 
 .toggle {

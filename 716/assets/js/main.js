@@ -349,63 +349,63 @@ class SceneManager
             this.container.style.borderColor = this.editMode ? c2 : hc;
         });
 
-        this.perlinOctavesSliderOutput.innerHTML = this.perlinOctavesSlider.value;
+        this.perlinOctavesSliderOutput.value = this.perlinOctavesSlider.value;
         this.perlinOctavesSlider.addEventListener("input", (event) =>
         {
-            this.perlinOctavesSliderOutput.innerHTML = event.target.value;
+            this.perlinOctavesSliderOutput.value = event.target.value;
             this.noiseConfigs.octaves = event.target.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
         })
-        this.perlinAmplitudeSliderOutput.innerHTML = this.perlinAmplitudeSlider.value;
+        this.perlinAmplitudeSliderOutput.value = this.perlinAmplitudeSlider.value;
         this.perlinAmplitudeSlider.addEventListener("input", (event) =>
         {
-            this.perlinAmplitudeSliderOutput.innerHTML = event.target.value;
+            this.perlinAmplitudeSliderOutput.value = event.target.value;
             this.noiseConfigs.amplitude = event.target.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
         });
-        this.perlinFrequencySliderOutput.innerHTML = this.perlinFrequencySlider.value;
+        this.perlinFrequencySliderOutput.value = this.perlinFrequencySlider.value;
         this.perlinFrequencySlider.addEventListener("input", (event) =>
         {
-            this.perlinFrequencySliderOutput.innerHTML = event.target.value;
+            this.perlinFrequencySliderOutput.value = event.target.value;
             this.noiseConfigs.frequency = event.target.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
         });
-        this.perlinPersistenceSliderOutput.innerHTML = this.perlinPersistenceSlider.value;
+        this.perlinPersistenceSliderOutput.value = this.perlinPersistenceSlider.value;
         this.perlinPersistenceSlider.addEventListener("input", (event) =>
         {
-            this.perlinPersistenceSliderOutput.innerHTML = event.target.value;
+            this.perlinPersistenceSliderOutput.value = event.target.value;
             this.noiseConfigs.persistance = event.target.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
         });
-        this.perlinLacunaritySliderOutput.innerHTML = this.perlinLacunaritySlider.value;
+        this.perlinLacunaritySliderOutput.value = this.perlinLacunaritySlider.value;
         this.perlinLacunaritySlider.addEventListener("input", (event) =>
         {
-            this.perlinLacunaritySliderOutput.innerHTML = event.target.value;
+            this.perlinLacunaritySliderOutput.value = event.target.value;
             this.noiseConfigs.lacunarity = event.target.value;
             this.applyPerlinToPoints();
             this.setPoints(...this.points);
             this.setTerrain();
         });
 
-        this.xRangeSliderOutput.innerHTML = this.xRangeSlider.value;
+        this.xRangeSliderOutput.value = this.xRangeSlider.value;
         this.xRangeSlider.addEventListener("input", (event) =>
         {
-            this.xRangeSliderOutput.innerHTML = event.target.value;
+            this.xRangeSliderOutput.value = event.target.value;
             this.xRange = event.target.value;
         });
 
-        this.zRangeSliderOutput.innerHTML = this.zRangeSlider.value;
+        this.zRangeSliderOutput.value = this.zRangeSlider.value;
         this.zRangeSlider.addEventListener("input", (event) =>
         {
-            this.zRangeSliderOutput.innerHTML = event.target.value;
+            this.zRangeSliderOutput.value = event.target.value;
             this.zRange = event.target.value;
         });
 
@@ -484,8 +484,10 @@ function init()
     const wrapperId = 'scene-wrapper';
     const containerId = 'scene-container';
     let wrapper = document.getElementById(wrapperId);
-    let container = document.getElementById(containerId);
-    const sceneManager = new SceneManager(containerId, wrapper.clientWidth, wrapper.clientHeight);
+    const wrapperScale = 1.0;
+    let w = wrapper.clientWidth * wrapperScale;
+    let h = wrapper.clientHeight * wrapperScale;
+    const sceneManager = new SceneManager(containerId, w, h);
 }
 
 export { init, SceneManager };

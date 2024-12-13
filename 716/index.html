@@ -21,41 +21,91 @@
             <h4>Delaunay Triangulation: A Pedagogical Aid</h4>
         </div>
         <div class="section-content">
-            <p>
-                This project will design a web-based tool to demonstrate
-                delaunay triangulation algorithm. The
+            <p id="main-description">
+                This project is a web-based tool to demonstrate the
+                <span class="highlight">delaunay triangulation algorithm</span>.
+                The
                 application will take a set of parameters from the user,
-                utilizing three.js to generate an interactive terrain.
+                utilizing <span class="highlight">three.js</span> to generate an
+                interactive terrain.
             </p>
-            <a href="https://docs.google.com/presentation/d/14hsV2ZAYD4DwswDwnqf8Np7A030X6dUXGVx2MTpwEN0/edit?usp=sharing"
-                target="_blank">Presentation
-                1</a>
-            <a href="https://docs.google.com/presentation/d/1HnqO9oaNq7DAWl7i8P_dOcf2T0sY08LUx4rq9RxvCM0/edit?usp=sharing"
-                target="_blank">Presentation
-                2</a>
-            <a
-                href="https://docs.google.com/presentation/d/1k2EgUfSktVQFJQBOkDYnE9ygslXFMm9ybrGhZwtSBCI/edit?usp=sharing">Presentation
-                3</a>
+            <div id="presentation-links">
+                <a href="https://docs.google.com/presentation/d/14hsV2ZAYD4DwswDwnqf8Np7A030X6dUXGVx2MTpwEN0/edit?usp=sharing"
+                    target="_blank">Presentation (5-weeks)</a>
+                -
+                <a href="https://docs.google.com/presentation/d/1HnqO9oaNq7DAWl7i8P_dOcf2T0sY08LUx4rq9RxvCM0/edit?usp=sharing"
+                    target="_blank">Presentation (10-weeks)</a>
+                -
+                <a
+                    href="https://docs.google.com/presentation/d/1k2EgUfSktVQFJQBOkDYnE9ygslXFMm9ybrGhZwtSBCI/edit?usp=sharing">Presentation(15-weeks)</a>
+                -
+                <a
+                    href="https://drive.google.com/file/d/1niv0fMI3hdk8Cl-U3ZxGlkGAid2np4Wc/view?usp=sharing">Final
+                    Presentation</a>
+            </div>
+
         </div>
     </div>
     <div id="content-wrapper">
+        <div class="ui-container" id="instructions">
+            <div class="ui-subgroup">
+                <ol>
+                    <li>Confirm your chosen <span class="highlight">Terrain
+                            Configuration</span></i>.
+                    </li>
+                    <li>Click <span class="highlight">Generate</span>.</li>
+                    <li>Use the mouse to control the camera.
+                        <ol type="i">
+                            <li><span class="highlight">Left-click</span>:
+                                rotate the camera</li>
+                            <li><span class="highlight">Right-click</span>:
+                                translate the camera
+                            </li>
+                            <li><span class="highlight">Scroll</span>: zoom
+                                in/out the camera
+                            </li>
+                            <li><span class="highlight">Double-click</span>:
+                                reset the camera
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+                <br>
+                <hr>
+                <br>
+                <ul>
+                    <li>Adjust the <span class="highlight">Noise
+                            Configuration</span></li>
+                    <li>Toggle the <span class="highlight">(Wireframe /
+                            Texture)</span> or <br> <span class="highlight">(No
+                            Points / Show Points)</span>.
+                    </li>
+                    <li>Toggle <span class="highlight">Edit Mode</span> to add
+                        points on click.
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div id="ui-container" class="ui-container">
             <div id="ui-input">
-                <div class="ui-subgroup" id="terrain-dimensions">
-                    Terrain Dimensions:
-                    <div class="ui-container">
+                <div class="ui-subgroup" id="terrain-configuration">
+                    <h2>Terrain Configuration:</h2>
+                    <br>
+                    <div class="ui-element-container">
                         <div class="ui-label">X Range</div>
                         <input type="range" min="0" max="1000" value="100"
                             class="slider" id="x-range-slider">
-                        <div class="slider-output" id="x-range-slider-output">
-                        </div>
+                        <input type="text" class="slider-output"
+                            id="x-range-slider-output">
+                    </div>
+                    <div class="ui-element-container">
                         <div class="ui-label">Z Range</div>
                         <input type="range" min="0" max="1000" value="100"
                             class="slider" id="z-range-slider">
-                        <div class="slider-output" id="z-range-slider-output">
-                        </div>
+                        <input type="text" class="slider-output"
+                            id="z-range-slider-output">
                     </div>
-                    <div class="ui-container">
+                    <div class="ui-element-container">
                         <div class="ui-label"># of Points</div>
                         <input type="range" min="0" max="10000" value="1000"
                             class="slider" id="point-count-slider">
@@ -64,53 +114,51 @@
                     </div>
                 </div>
 
-                <div class="ui-subgroup">
-                    Perlin Configuration:
+                <div class="ui-subgroup" id="perlin-configuration">
+                    <h2>Noise Configuration:</h2>
+                    <br>
                     <div class="ui-element-container">
                         <div class="ui-label">Octaves</div>
                         <input type="range" min="0" max="10" value="2"
                             class="slider" id="perlin-octaves-slider">
-                        <div class="slider-output"
+                        <input type="text" class="slider-output"
                             id="perlin-octaves-slider-output">
-                        </div>
                     </div>
                     <div class="ui-element-container">
                         <div class="ui-label">Amplitude</div>
                         <input type="range" min="0" max="50" value="25"
                             class="slider" id="perlin-amplitude-slider">
-                        <div class="slider-output"
+                        <input type="text" class="slider-output"
                             id="perlin-amplitude-slider-output">
-                        </div>
                     </div>
                     <div class="ui-element-container">
                         <div class="ui-label">Frequency</div>
                         <input type="range" min="0" max="0.05" step="0.001"
                             value="0.02" class="slider"
                             id="perlin-frequency-slider">
-                        <div class="slider-output"
+                        <input type="text" class="slider-output"
                             id="perlin-frequency-slider-output">
-                        </div>
                     </div>
                     <div class="ui-element-container">
                         <div class="ui-label">Persistence</div>
                         <input type="range" min="0" max="1" step="0.01"
                             value="0.5" class="slider"
                             id="perlin-persistence-slider">
-                        <div class="slider-output"
+                        <input type="text" class="slider-output"
                             id="perlin-persistence-slider-output">
-                        </div>
                     </div>
                     <div class="ui-element-container">
                         <div class="ui-label">Lacunarity</div>
                         <input type="range" min="0" max="10" value="2"
                             class="slider" id="perlin-lacunarity-slider">
-                        <div class="slider-output"
+                        <input type="text" class="slider-output"
                             id="perlin-lacunarity-slider-output">
-                        </div>
                     </div>
                 </div>
 
                 <div class="ui-subgroup">
+                    <h2>Main Configuration:</h2>
+                    <br>
                     <div class="ui-element-container">
                         <div class="ui-label">Wireframe</div>
                         <div class="toggle" id="toggle-wireframe">
