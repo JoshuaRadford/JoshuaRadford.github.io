@@ -31,7 +31,7 @@
     <!-- Website scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         crossorigin="anonymous"></script>
-    <script type="module" src="assets/js/home_loader.js"></script>
+    <script type="module" src="assets/js/loader.js"></script>
 
     <title>Joshua Radford | Interactive Developer</title>
 </head>
@@ -55,9 +55,9 @@
 
     <!-- Hero Section -->
     <section class="hero" id="about">
-        <div class="bio animate__animated animate__shakeX">
-            <h2 class="bio-title">About Me</h2>
-            <p class="bio-text">
+        <div id="bio" class="animate__animated animate__shakeX">
+            <h2 id="bio-title">About Me</h2>
+            <p id="bio-text">
                 Welcome! I'm Joshua Radford, an Interactive Developer
                 studying Game Design and Development at
                 <a href="https://www.rit.edu" target="_blank">RIT</a>.
@@ -71,22 +71,22 @@
         </div>
     </section>
 
-    <section class="projects" id="projects">
+    <section id="projects">
         <div class="section-header">
             <h2>Projects
-                <a id="projects-see-all" style="display:none">(See All)</a>
+                <a id="projects-see-all" style="display:none">(see all)</a>
             </h2>
         </div>
         <!-- Projects section -->
-        <div class="projects-container"></div>
+        <div id="projects-container"></div>
     </section>
 
     <!-- Contact section -->
-    <section class="contact" id="contact">
-        <div class="section-headerr">
+    <section id="contact">
+        <div class="section-header">
             <h2>Contact Me</h2>
         </div>
-        <div class="contact-content">
+        <div id="contact-content">
             <p>Send a message my way at <a
                     href="mailto:joshuaradford99@yahoo.com?Subject=Hey, Josh! I saw your portfolio."
                     target="_blank">joshuaradford99@yahoo.com</a> , and I'll get
@@ -94,7 +94,7 @@
                 media
                 or peruse more of my work at links below.</p>
             <!-- Social accounts - Fixed to the right -->
-            <div class="socials">
+            <div id="socials">
                 <a href="https://www.linkedin.com/in/joshua-radford-681802149/"
                     target="_blank"><img src="assets/icons/linkedin.png"
                         alt="Linkedin" loading="lazy" class="socicon" /></a>

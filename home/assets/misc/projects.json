@@ -1,0 +1,128 @@
+[
+    {
+        "title": "Changeling",
+        "subtitle": "3D VR Mystery Game",
+        "categories": [
+            {
+                "name": "Professional"
+            },
+            {
+                "name": "Co-op/Internship"
+            }
+        ],
+        "skills": [
+            {
+                "name": "Unreal Engine 4",
+                "category": "Engine"
+            },
+            {
+                "name": "UI/UX Design",
+                "category": "Design"
+            },
+            {
+                "name": "Perforce",
+                "category": "Source Control"
+            },
+            {
+                "name": "Level Design",
+                "category": "Design"
+            },
+            {
+                "name": "Documentation",
+                "category": "Documentation"
+            }
+        ],
+        "description": "Developed a fully functional prototype for a major level in a 3D VR mystery game, collaborating with a cross-disciplinary team of over 20 designers, artists, and audio engineers. Leveraged Unreal Engine 4 to craft immersive gameplay experiences while ensuring seamless UI/UX design and detailed project documentation.",
+        "imagePath": "assets/images/CHG.gif",
+        "projectLink": "https://changelingvr.com",
+        "downloadLink": "https://drive.google.com/uc?export=download&confirm=vHz-&id=1w2UEVYL7vYth15NmXheoG46dfrbP4JVt"
+    },
+    {
+        "title": "Data Analysis on Income Inequality",
+        "subtitle": "Unity Application",
+        "categories": [
+            {
+                "name": "Personal"
+            }
+        ],
+        "skills": [
+            {
+                "name": "Python",
+                "category": "Programming"
+            },
+            {
+                "name": "Unity Engine",
+                "category": "Engine"
+            },
+            {
+                "name": "C#",
+                "category": "Programming"
+            },
+            {
+                "name": "Mapbox",
+                "category": "Tool"
+            }
+        ],
+        "description": "Built an interactive Unity-based application to visualize the impact of income inequality over time using Python and GeoJSON data. Combined advanced data analysis techniques with Unity tools to present chronological trends, showcasing technical expertise in programming, data parsing, and spatial visualization tools like Mapbox.",
+        "imagePath": "assets/images/DAI.gif"
+    },
+    {
+        "title": "Greg, Son of Greg",
+        "subtitle": "Roguelike Dungeon-Crawler Game",
+        "categories": [
+            {
+                "name": "Personal"
+            }
+        ],
+        "skills": [
+            {
+                "name": "Unity Engine",
+                "category": "Engine"
+            },
+            {
+                "name": "C#",
+                "category": "Programming"
+            },
+            {
+                "name": "UI/UX Design",
+                "category": "Design"
+            },
+            {
+                "name": "Documentation",
+                "category": "Documentation"
+            },
+            {
+                "name": "Procedural Generation",
+                "category": "Programming"
+            }
+        ],
+        "description": "Designed and developed a rogue-like dungeon crawler with procedurally generated levels, where players inherit skills through successive generations. Delivered an engaging gameplay experience by implementing procedural generation algorithms, dynamic UI/UX elements, and detailed project documentation using Unity and C#.",
+        "imagePath": "assets/images/GSG.gif"
+    },
+    {
+        "title": "Terrain Generation with Delaunay Triangulation",
+        "subtitle": "Pedagogical Aid",
+        "categories": [
+            {
+                "name": "Personal"
+            }
+        ],
+        "skills": [
+            {
+                "name": "Javascript",
+                "category": "Programming"
+            },
+            {
+                "name": "Web Design",
+                "category": "Design"
+            },
+            {
+                "name": "UI/UX Design",
+                "category": "Design"
+            }
+        ],
+        "description": "Developed an interactive web-based tool to demonstrate the Delaunay triangulation algorithm, showcasing expertise in computational geometry and real-time 3D rendering. Implemented a user-friendly interface and utilized Three.js to create dynamic, visually engaging terrain visualizations. Highlights ability to combine algorithm design with interactive web development.",
+        "imagePath": "assets/images/716.png",
+        "projectLink": "https://joshuaradford.github.io/716/"
+    }
+]
