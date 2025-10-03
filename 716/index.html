@@ -15,12 +15,12 @@
 </head>
 
 <body>
-    <div class="section-container">
+    <div class="section-container" id="main-header-container">
         <div class="section-header">
             <h2>Procedural Map Generator</h2>
             <h4>Delaunay Triangulation: A Pedagogical Aid</h4>
         </div>
-        <div class="section-content">
+        <div class="section-content" id="main-header-content">
             <p id="main-description">
                 This project is a web-based tool to demonstrate the
                 <span class="highlight">delaunay triangulation algorithm</span>.
@@ -32,13 +32,13 @@
             <div id="presentation-links">
                 <a href="https://docs.google.com/presentation/d/14hsV2ZAYD4DwswDwnqf8Np7A030X6dUXGVx2MTpwEN0/edit?usp=sharing"
                     target="_blank">Presentation (5-weeks)</a>
-                -
+                |
                 <a href="https://docs.google.com/presentation/d/1HnqO9oaNq7DAWl7i8P_dOcf2T0sY08LUx4rq9RxvCM0/edit?usp=sharing"
                     target="_blank">Presentation (10-weeks)</a>
-                -
+                |
                 <a href="https://docs.google.com/presentation/d/1k2EgUfSktVQFJQBOkDYnE9ygslXFMm9ybrGhZwtSBCI/edit?usp=sharing"
                     target="_blank">Presentation(15-weeks)</a>
-                -
+                |
                 <a href="https://drive.google.com/file/d/1niv0fMI3hdk8Cl-U3ZxGlkGAid2np4Wc/view?usp=sharing"
                     target="_blank">Final
                     Presentation</a>
@@ -89,8 +89,7 @@
         <div id="ui-container" class="ui-container">
             <div id="ui-input">
                 <div class="ui-subgroup" id="terrain-configuration">
-                    <h2>Terrain Configuration:</h2>
-                    <br>
+                    <h2 class="ui-subgroup-header">Terrain Configuration:</h2>
                     <div class="ui-element-container">
                         <div class="ui-label">X Range</div>
                         <input type="range" min="0" max="1000" value="100"
@@ -115,8 +114,7 @@
                 </div>
 
                 <div class="ui-subgroup" id="perlin-configuration">
-                    <h2>Noise Configuration:</h2>
-                    <br>
+                    <h2 class="ui-subgroup-header">Noise Configuration:</h2>
                     <div class="ui-element-container">
                         <div class="ui-label">Octaves</div>
                         <input type="range" min="0" max="10" value="2"
@@ -157,8 +155,7 @@
                 </div>
 
                 <div class="ui-subgroup">
-                    <h2>Main Configuration:</h2>
-                    <br>
+                    <h2 class="ui-subgroup-header">Main Configuration:</h2>
                     <div class="ui-element-container">
                         <div class="ui-label">Wireframe</div>
                         <div class="toggle" id="toggle-wireframe">
@@ -184,7 +181,7 @@
             </div>
         </div>
         <div id="scene-wrapper">
-            <div id="scene-container" class="project-content no-selection">
+            <div id="scene-container" class="no-selection">
             </div>
         </div>
     </div>

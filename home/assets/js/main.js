@@ -112,34 +112,78 @@ function handleTagClick(tag, type)
 function createProjectWidget(p)
 {
     let widget = createElement('div', ['project-card']);
-    let content = createElement('div', ['project-content']);
+    let content = createElement('div', ['project-content', 'dropdown-menu']);
     let previewContainer = createElement('div', ['project-preview-container']);
-    if (p.projectLink)
+    previewContainer.addEventListener('click', () => toggleDropdown(content));
+    if (p.extLink)
     {
         previewContainer.addEventListener('click', () =>
-            window.open(p.projectLink, "_blank")
+            window.open(p.extLink, "_blank")
         );
     }
-    let preview = createElement('img', ['project-preview']);
-    preview.src = p.imagePath;
+    let previewImage = createElement('img', ['project-preview-image', 'dropdown-header']);
+    previewImage.src = p.imagePath;
     let titleContainer = createElement('div', ['project-title-block']);
     let title = createElement('h3', [], p.title);
     let subtitle = createElement('h4', ['project-subtitle'], p.subtitle);
     let description = createElement(
         'p', ['project-description'], p.description
     );
-    let tagsContainer = createElement('div', ['flex-row-center']);
-    let skillsDropdown = createDropDown('Skill Tags', p.skills, 'skill');
-    let categoriesDropdown = createDropDown(
-        'Project Types', p.categories, 'category'
-    );
+    if(p.skills?.length)
+    {
+        let container = createElement('div', ['project-tags-container']);
+        p.skills.forEach(s => {
+            let tag = createElement('div', ['project-tag'], s.abbrev);
+            tag.title = s.name;
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                handleTagClick(s, 'skill');
+            });
+            container.appendChild(tag);
+        });
+        widget.prepend(container);
+    }
+    if(p.categories?.length)
+    {
+        let container = createElement('div', ['project-tags-container']);
+        p.categories.forEach(c => {
+            let tag = createElement('div', ['project-tag'], c.abbrev);
+            tag.title = c.name;
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                handleTagClick(c, 'category');
+            });
+            container.appendChild(tag);
+        });
+        widget.prepend(container);
+    }
+    if(p.links?.length)
+    {
+        const imgLabels = { external: 'arrow_out.svg', demo: 'motion_play.svg', download: 'download.svg' };
+        let container = createElement('div', ['project-preview-icon-container']);
+        p.links.forEach(e => {
+            if(imgLabels[e.type])
+            {
+                let iconWrapper = createElement('div', ['project-preview-icon-wrapper']);
+                let iconRef  = createElement('a', ['project-preview-icon']);
+                let iconImage = createElement('img');
+                let iconText = createElement('span', ['project-preview-icon-text']);
+                iconImage.src = `assets/icons/${imgLabels[e.type]}`;
+                // iconRef.title = e.type;
+                iconText.innerText = e.type.charAt(0).toUpperCase() + e.type.slice(1);
+                Object.assign(iconRef, { href: e.url, target: "_blank" });
+                iconRef.appendChild(iconImage);
+                iconWrapper.appendChild(iconText);
+                iconWrapper.appendChild(iconRef);
+                container.appendChild(iconWrapper);
+            }
+        });
+        previewContainer.prepend(container);
+    }
     [title, subtitle].forEach(e => titleContainer.appendChild(e));
-    [preview, titleContainer].forEach(e => previewContainer.appendChild(e));
-    [skillsDropdown, categoriesDropdown].forEach(e =>
-        tagsContainer.appendChild(e)
-    );
-    [description, tagsContainer].forEach(e => content.appendChild(e));
-    [previewContainer, content].forEach(e => widget.appendChild(e));
+    [previewImage, titleContainer].forEach(e => previewContainer.prepend(e));
+    [description].forEach(e => content.appendChild(e));
+    [content, previewContainer].forEach(e => widget.prepend(e));
     p.htmlBlock = widget;
 
     return widget

@@ -19,5 +19,23 @@ function isColor(strColor) {
     return s.color === strColor;
 }
 
+function abbreviateOrAcronym(str) {
+  const stopWords = new Set(["and", "of", "the", "in", "on", "at"]);
+  const words = str.trim().split(/\s+/);
 
-export { clamp, getRandomInt, isColor, themeColors };
+  if (words.length > 1) {
+    // Multiword → Acronym
+    return words
+      .filter(w => w && !stopWords.has(w.toLowerCase()))
+      .map(w => w[0].toUpperCase())
+      .join("");
+  } else {
+    // Single word → Abbreviation
+    const word = words[0];
+    if (word.length <= 4) return word;
+    return word.slice(0, 3);
+  }
+}
+
+
+export { clamp, getRandomInt, isColor, themeColors, abbreviateOrAcronym };

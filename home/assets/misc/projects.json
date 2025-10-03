@@ -1,128 +1,215 @@
 [
     {
+        "title": "Culling Optimization Using Meshlets",
+        "subtitle": "Capstone Project",
+        "categories": [
+            {
+                "name": "Academic",
+                "abbrev": "Acad"
+            }
+        ],
+        "skills": [
+            {
+                "name": "C++",
+                "category": "Programming",
+                "abbrev": "C++"
+            },
+            {
+                "name": "C#",
+                "category": "Programming",
+                "abbrev": "C#"
+            },
+            {
+                "name": "Unity Engine",
+                "category": "Engine",
+                "abbrev": "Uni"
+            },
+            {
+                "name": "DirectX12",
+                "category": "API",
+                "abbrev": "DX12"
+            },
+            {
+                "name": "HLSL",
+                "category": "Shader Language",
+                "abbrev": "HLSL"
+            },
+            {
+                "name": "3D Graphics",
+                "category": "Graphics",
+                "abbrev": "3D"
+            }
+        ],
+        "description": "<ul><li>Engineered a cutting-edge culling optimization system utilizing meshlet technology to enhance rendering performance in 3D environments.</li><li>Developed a custom DirectX 12-based renderer with HLSL shaders, achieving significant frame rate improvements in complex scenes.</li><li>Demonstrated proficiency in advanced graphics programming, real-time rendering techniques, and performance optimization strategies.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/csms_capstone.gif",
+        "links": [
+            {
+                "type": "download",
+                "url": "https://drive.google.com/drive/folders/1Llp1lbSOg3UnoyniWrSDCoPhBjx5e8yl?usp=drive_link"
+            },
+            {
+                "type": "external",
+                "url": "https://changelingvr.com"
+            }
+        ]
+    },
+    {
         "title": "Changeling",
         "subtitle": "3D VR Mystery Game",
         "categories": [
             {
-                "name": "Professional"
+                "name": "Professional",
+                "abbrev": "Prof"
             },
             {
-                "name": "Co-op/Internship"
+                "name": "Co-op/Internship",
+                "abbrev": "Coop"
             }
         ],
         "skills": [
             {
                 "name": "Unreal Engine 4",
-                "category": "Engine"
+                "category": "Engine",
+                "abbrev": "UE4"
             },
             {
                 "name": "UI/UX Design",
-                "category": "Design"
+                "category": "Design",
+                "abbrev": "UIUX"
             },
             {
                 "name": "Perforce",
-                "category": "Source Control"
+                "category": "Source Control",
+                "abbrev": "P4"
             },
             {
                 "name": "Level Design",
-                "category": "Design"
+                "category": "Design",
+                "abbrev": "Lvl"
             },
             {
                 "name": "Documentation",
-                "category": "Documentation"
+                "category": "Documentation",
+                "abbrev": "Doc"
             }
         ],
-        "description": "Developed a fully functional prototype for a major level in a 3D VR mystery game, collaborating with a cross-disciplinary team of over 20 designers, artists, and audio engineers. Leveraged Unreal Engine 4 to craft immersive gameplay experiences while ensuring seamless UI/UX design and detailed project documentation.",
-        "imagePath": "assets/images/CHG.gif",
-        "projectLink": "https://changelingvr.com",
-        "downloadLink": "https://drive.google.com/uc?export=download&confirm=vHz-&id=1w2UEVYL7vYth15NmXheoG46dfrbP4JVt"
+        "description": "<ul><li>Developed a fully functional prototype for a major level in a 3D VR mystery game, collaborating with a cross-disciplinary team of over 20 designers, artists, and audio engineers.</li><li>Leveraged Unreal Engine 4 to craft immersive gameplay experiences while ensuring seamless UI/UX design and detailed project documentation.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/changeling.gif",
+        "links": [
+            {
+                "type": "external",
+                "url": "https://changelingvr.com"
+            }
+        ]
     },
     {
         "title": "Data Analysis on Income Inequality",
         "subtitle": "Unity Application",
         "categories": [
             {
-                "name": "Personal"
+                "name": "Personal",
+                "abbrev": "Pers"
             }
         ],
         "skills": [
             {
                 "name": "Python",
-                "category": "Programming"
+                "category": "Programming",
+                "abbrev": "Py"
             },
             {
                 "name": "Unity Engine",
-                "category": "Engine"
+                "category": "Engine",
+                "abbrev": "Uni"
             },
             {
                 "name": "C#",
-                "category": "Programming"
+                "category": "Programming",
+                "abbrev": "C#"
             },
             {
                 "name": "Mapbox",
-                "category": "Tool"
+                "category": "Tool",
+                "abbrev": "Map"
             }
         ],
-        "description": "Built an interactive Unity-based application to visualize the impact of income inequality over time using Python and GeoJSON data. Combined advanced data analysis techniques with Unity tools to present chronological trends, showcasing technical expertise in programming, data parsing, and spatial visualization tools like Mapbox.",
-        "imagePath": "assets/images/DAI.gif"
+        "description": "<ul><li>Built an interactive Unity-based application to visualize the impact of income inequality over time using Python and GeoJSON data.</li><li>Combined advanced data analysis techniques with Unity tools to present chronological trends, showcasing technical expertise in programming, data parsing, and spatial visualization tools like Mapbox.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/igme_386.gif",
+        "links": []
     },
     {
         "title": "Greg, Son of Greg",
         "subtitle": "Roguelike Dungeon-Crawler Game",
         "categories": [
             {
-                "name": "Personal"
+                "name": "Personal",
+                "abbrev": "Pers"
             }
         ],
         "skills": [
             {
                 "name": "Unity Engine",
-                "category": "Engine"
+                "category": "Engine",
+                "abbrev": "Uni"
             },
             {
                 "name": "C#",
-                "category": "Programming"
+                "category": "Programming",
+                "abbrev": "C#"
             },
             {
                 "name": "UI/UX Design",
-                "category": "Design"
+                "category": "Design",
+                "abbrev": "UIUX"
             },
             {
                 "name": "Documentation",
-                "category": "Documentation"
+                "category": "Documentation",
+                "abbrev": "Doc"
             },
             {
                 "name": "Procedural Generation",
-                "category": "Programming"
+                "category": "Programming",
+                "abbrev": "Proc"
             }
         ],
-        "description": "Designed and developed a rogue-like dungeon crawler with procedurally generated levels, where players inherit skills through successive generations. Delivered an engaging gameplay experience by implementing procedural generation algorithms, dynamic UI/UX elements, and detailed project documentation using Unity and C#.",
-        "imagePath": "assets/images/GSG.gif"
+        "description": "<ul><li>Designed and developed a rogue-like dungeon crawler with procedurally generated levels, where players inherit skills through successive generations.</li><li>Delivered an engaging gameplay experience by implementing procedural generation algorithms, dynamic UI/UX elements, and detailed project documentation using Unity and C#.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/gdd_ryoc.gif",
+        "links": []
     },
     {
         "title": "Terrain Generation with Delaunay Triangulation",
         "subtitle": "Pedagogical Aid",
         "categories": [
             {
-                "name": "Personal"
+                "name": "Academic",
+                "abbrev": "Acad"
             }
         ],
         "skills": [
             {
                 "name": "Javascript",
-                "category": "Programming"
+                "category": "Programming",
+                "abbrev": "JS"
             },
             {
                 "name": "Web Design",
-                "category": "Design"
+                "category": "Design",
+                "abbrev": "Web"
             },
             {
                 "name": "UI/UX Design",
-                "category": "Design"
+                "category": "Design",
+                "abbrev": "UIUX"
             }
         ],
-        "description": "Developed an interactive web-based tool to demonstrate the Delaunay triangulation algorithm, showcasing expertise in computational geometry and real-time 3D rendering. Implemented a user-friendly interface and utilized Three.js to create dynamic, visually engaging terrain visualizations. Highlights ability to combine algorithm design with interactive web development.",
-        "imagePath": "assets/images/716.png",
-        "projectLink": "https://joshuaradford.github.io/716/"
+        "description": "<ul><li>Developed an interactive web-based tool to demonstrate the Delaunay triangulation algorithm, showcasing expertise in computational geometry and real-time 3D rendering.</li><li>Implemented a user-friendly interface and utilized Three.js to create dynamic, visually engaging terrain visualizations.</li><li>Highlights ability to combine algorithm design with interactive web development.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/csci_716.png",
+        "links": [
+            {
+                "type": "demo",
+                "url": "https://joshuaradford.github.io/716/"
+            }
+        ]
     }
 ]
