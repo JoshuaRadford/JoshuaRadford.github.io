@@ -45,11 +45,16 @@ body {
 }
 
 .section-header {
-    color: var(--text-color-secondary);
+    color: var(--text-color-primary);
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    margin: 1rem auto;
+}
+
+.section-header h2 {
+    color: rgba(255, 255, 255, 1);
 }
 
 .section-subheader {
@@ -81,7 +86,7 @@ p {
 
 h2, h3 {
     font-family: var(--header-font-family);
-    color: var(--text-color-secondary);
+    color: var(--text-color-primary);
 }
 
 h4 {
@@ -183,7 +188,11 @@ nav ul {
     height: auto;
     font-size: 2rem;
     font-weight: var(--bolder-font);
-    color: var(--text-color-secondary);
+    background: linear-gradient(135deg, #60a5fa, #a855f7);
+    background-clip: text;
+    -webkit-background-clip: text; /* Chrome, Safari */
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* Chrome, Safari */
 }
 
 
@@ -210,6 +219,7 @@ nav ul {
 }
 
 #bio h2 {
+    color: white;
     margin: 0.5rem;
 }
 
@@ -294,7 +304,6 @@ nav ul {
     aspect-ratio: 16/9;
     border-radius: 0.25rem;
     transition: var(--transition);
-    cursor: pointer;
 }
 
 .project-card__image {
@@ -307,6 +316,7 @@ nav ul {
     height: 100%;
     filter: saturate(0.95) contrast(1.08);
     transition: transform var(--transition), opacity var(--transition), filter var(--transition);
+    pointer-events: none;
 }
 
 .project-card:hover .project-card__image {
@@ -339,6 +349,7 @@ nav ul {
     align-items: center;
     width: 1.8rem;
     height: 1.8rem;
+    border: 0.1rem solid rgba(0, 0, 0, 0.5);
     border-radius: 0.25rem;
     background: rgba(255, 255, 255, 0.78);
     filter: invert(1);
@@ -554,6 +565,14 @@ nav ul {
 #contact p {
     width: 75%;
     color: var(--text-color-primary);
+}
+
+#mailto {
+    background: linear-gradient(135deg, #60a5fa, #a855f7);
+    background-clip: text;
+    -webkit-background-clip: text; /* Chrome, Safari */
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* Chrome, Safari */
 }
 
 #socials {
