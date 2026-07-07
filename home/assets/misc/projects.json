@@ -40,6 +40,7 @@
                 "abbrev": "3D"
             }
         ],
+        "overview": "High-performance GPU culling using mesh shaders and meshlets in Unity + DirectX12.",
         "description": "<ul><li>Engineered a cutting-edge culling optimization system utilizing meshlet technology to enhance rendering performance in 3D environments.</li><li>Developed a custom DirectX 12-based renderer with HLSL shaders, achieving significant frame rate improvements in complex scenes.</li><li>Demonstrated proficiency in advanced graphics programming, real-time rendering techniques, and performance optimization strategies.</li></ul>",
         "imagePath": "assets/images/project_thumbnails/csms_capstone.gif",
         "links": [
@@ -93,6 +94,7 @@
                 "abbrev": "Doc"
             }
         ],
+        "overview": "A narrative-driven VR game built in Unreal Engine 4 with immersive interactions and puzzles.",
         "description": "<ul><li>Developed a fully functional prototype for a major level in a 3D VR mystery game, collaborating with a cross-disciplinary team of over 20 designers, artists, and audio engineers.</li><li>Leveraged Unreal Engine 4 to craft immersive gameplay experiences while ensuring seamless UI/UX design and detailed project documentation.</li></ul>",
         "imagePath": "assets/images/project_thumbnails/changeling.gif",
         "links": [
@@ -107,8 +109,8 @@
         "subtitle": "Unity Application",
         "categories": [
             {
-                "name": "Personal",
-                "abbrev": "Pers"
+                "name": "Academic",
+                "abbrev": "Acad"
             }
         ],
         "skills": [
@@ -133,6 +135,7 @@
                 "abbrev": "Map"
             }
         ],
+        "overview": "Interactive data visualization tool exploring global income inequality using Unity and Python.",
         "description": "<ul><li>Built an interactive Unity-based application to visualize the impact of income inequality over time using Python and GeoJSON data.</li><li>Combined advanced data analysis techniques with Unity tools to present chronological trends, showcasing technical expertise in programming, data parsing, and spatial visualization tools like Mapbox.</li></ul>",
         "imagePath": "assets/images/project_thumbnails/igme_386.gif",
         "links": []
@@ -173,6 +176,7 @@
                 "abbrev": "Proc"
             }
         ],
+        "overview": "A roguelike dungeon crawler featuring procedural levels, combat, and RPG progression.",
         "description": "<ul><li>Designed and developed a rogue-like dungeon crawler with procedurally generated levels, where players inherit skills through successive generations.</li><li>Delivered an engaging gameplay experience by implementing procedural generation algorithms, dynamic UI/UX elements, and detailed project documentation using Unity and C#.</li></ul>",
         "imagePath": "assets/images/project_thumbnails/gdd_ryoc.gif",
         "links": []
@@ -203,6 +207,7 @@
                 "abbrev": "UIUX"
             }
         ],
+        "overview": "Educational tool that visualizes terrain generation using Delauney triangulation and adjustable parameters.",
         "description": "<ul><li>Developed an interactive web-based tool to demonstrate the Delaunay triangulation algorithm, showcasing expertise in computational geometry and real-time 3D rendering.</li><li>Implemented a user-friendly interface and utilized Three.js to create dynamic, visually engaging terrain visualizations.</li><li>Highlights ability to combine algorithm design with interactive web development.</li></ul>",
         "imagePath": "assets/images/project_thumbnails/csci_716.png",
         "links": [

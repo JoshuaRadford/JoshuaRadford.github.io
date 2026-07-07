@@ -2,6 +2,12 @@ class ProjectManager
 {
     projects;
 
+    projectColors = {
+    academic: "#2A9D8F",
+    personal: "#ffc400",
+    professional: "#8000ff"
+    };
+
     async loadProjects()
     {
         try

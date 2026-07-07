@@ -19,19 +19,7 @@ async function init()
 function initGlobalEvents()
 {
     let scrollUp = document.getElementById('scroll-up');
-    let seeAll = document.getElementById('projects-see-all');
-
-    // Close the dropdown if the user clicks outside of it
-    window.addEventListener("click", function (event)
-    {
-        if (!event.target.classList.contains('dropdown-header'))
-        {
-            document.querySelectorAll('.dropdown-menu').forEach(menu =>
-            {
-                menu.style.maxHeight = '0px';
-            });
-        }
-    });
+    let seeAll = document.getElementById('projects-toggle');
 
     scrollUp.addEventListener('click', () =>
     {
@@ -55,33 +43,6 @@ function createElement(type, classes = [], content = '')
     element.classList.add(...classes);
     element.innerHTML = (content) ? content : element.innerHTML;
     return element;
-}
-
-function createDropDown(headerText, tags, type)
-{
-    const container = createElement('div', ['dropdown-container']);
-    const header = createElement('div', ['dropdown-header'], headerText);
-    const menu = createElement('div', ['dropdown-menu']);
-    header.addEventListener('click', () => toggleDropdown(menu));
-    tags.forEach(t =>
-    {
-        const tag = createElement('div', ['project-tag'], t.name);
-        tag.addEventListener('click', () => handleTagClick(t, type));
-        menu.appendChild(tag);
-    });
-    [header, menu].forEach(e => container.appendChild(e));
-    container.appendChild(header);
-    container.appendChild(menu);
-    return container;
-}
-
-function toggleDropdown(dropdown)
-{
-    const closed = (
-        dropdown.style.maxHeight == '0px' ||
-        dropdown.style.maxHeight == 0
-    );
-    dropdown.style.maxHeight = closed ? dropdown.scrollHeight + 'px' : '0px';
 }
 
 function handleTagClick(tag, type)
@@ -112,28 +73,31 @@ function handleTagClick(tag, type)
 function createProjectWidget(p)
 {
     let widget = createElement('div', ['project-card']);
-    let content = createElement('div', ['project-content', 'dropdown-menu']);
-    let previewContainer = createElement('div', ['project-preview-container']);
-    previewContainer.addEventListener('click', () => toggleDropdown(content));
+    let body = createElement('div', ['project-card__body']);
+    let media = createElement('div', ['project-card__media']);
+
     if (p.extLink)
     {
-        previewContainer.addEventListener('click', () =>
+        media.addEventListener('click', () =>
             window.open(p.extLink, "_blank")
         );
     }
-    let previewImage = createElement('img', ['project-preview-image', 'dropdown-header']);
-    previewImage.src = p.imagePath;
-    let titleContainer = createElement('div', ['project-title-block']);
-    let title = createElement('h3', [], p.title);
-    let subtitle = createElement('h4', ['project-subtitle'], p.subtitle);
+
+    let img = createElement('img', ['project-card__image']);
+    img.src = p.imagePath;
+    let titles = createElement('div', ['project-card__titles']);
+    let title = createElement('h3', ['project-card__title'], p.title);
+    let subtitle = createElement('h4', ['project-card__subtitle'], p.subtitle);
+    let overview = createElement('p', ['project-card__description'], p.overview);
     let description = createElement(
-        'p', ['project-description'], p.description
+        'p', ['project-card__description'], p.description
     );
+
     if(p.skills?.length)
     {
-        let container = createElement('div', ['project-tags-container']);
+        let container = createElement('div', ['project-card__meta']);
         p.skills.forEach(s => {
-            let tag = createElement('div', ['project-tag'], s.abbrev);
+            let tag = createElement('div', ['project-card__tag'], s.abbrev);
             tag.title = s.name;
             tag.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -143,47 +107,42 @@ function createProjectWidget(p)
         });
         widget.prepend(container);
     }
+
     if(p.categories?.length)
     {
-        let container = createElement('div', ['project-tags-container']);
-        p.categories.forEach(c => {
-            let tag = createElement('div', ['project-tag'], c.abbrev);
-            tag.title = c.name;
-            tag.addEventListener('click', (e) => {
-                e.stopPropagation();
-                handleTagClick(c, 'category');
-            });
-            container.appendChild(tag);
-        });
-        widget.prepend(container);
+        let catName = p.categories[0].name.toLowerCase();
+        let catColor = projectManager.projectColors[catName] || "#ffffff";
+        widget.style.setProperty('--project-color', catColor);
     }
+
     if(p.links?.length)
     {
-        const imgLabels = { external: 'arrow_out.svg', demo: 'motion_play.svg', download: 'download.svg' };
-        let container = createElement('div', ['project-preview-icon-container']);
+        const imgLabels = { external: 'external.svg', demo: 'motion_play.svg', download: 'download.svg' };
+        let container = createElement('div', ['project-card__badges']);
         p.links.forEach(e => {
             if(imgLabels[e.type])
             {
-                let iconWrapper = createElement('div', ['project-preview-icon-wrapper']);
-                let iconRef  = createElement('a', ['project-preview-icon']);
-                let iconImage = createElement('img');
-                let iconText = createElement('span', ['project-preview-icon-text']);
-                iconImage.src = `assets/icons/${imgLabels[e.type]}`;
+                let badgeWrapper = createElement('div', ['project-card__badge-wrapper']);
+                let badge  = createElement('a', ['project-card__badge']);
+                let img = createElement('img');
+                let tooltip = createElement('span', ['project-card__badge-tooltip']);
+                img.src = `assets/icons/${imgLabels[e.type]}`;
                 // iconRef.title = e.type;
-                iconText.innerText = e.type.charAt(0).toUpperCase() + e.type.slice(1);
-                Object.assign(iconRef, { href: e.url, target: "_blank" });
-                iconRef.appendChild(iconImage);
-                iconWrapper.appendChild(iconText);
-                iconWrapper.appendChild(iconRef);
-                container.appendChild(iconWrapper);
+                tooltip.innerText = e.type.charAt(0).toUpperCase() + e.type.slice(1);
+                Object.assign(badge, { href: e.url, target: "_blank" });
+                badge.appendChild(img);
+                badgeWrapper.appendChild(tooltip);
+                badgeWrapper.appendChild(badge);
+                container.appendChild(badgeWrapper);
             }
         });
-        previewContainer.prepend(container);
+        media.prepend(container);
     }
-    [title, subtitle].forEach(e => titleContainer.appendChild(e));
-    [previewImage, titleContainer].forEach(e => previewContainer.prepend(e));
-    [description].forEach(e => content.appendChild(e));
-    [content, previewContainer].forEach(e => widget.prepend(e));
+
+    [title, subtitle].forEach(e => titles.appendChild(e));
+    [img].forEach(e => media.prepend(e));
+    [titles, overview].forEach(e => body.appendChild(e));
+    [body, media].forEach(e => widget.prepend(e));
     p.htmlBlock = widget;
 
     return widget
@@ -194,7 +153,7 @@ function createProjectWidget(p)
  */
 function visualizeActiveProjects()
 {
-    let seeAll = document.getElementById('projects-see-all');
+    let seeAll = document.getElementById('projects-toggle');
     let projects = projectManager.projects;
     let activeProjects = projectManager.getActiveProjects();
     const isSubset = (activeProjects.length < projects.length);
@@ -215,7 +174,7 @@ function visualizeActiveProjects()
  */
 function populateProjects()
 {
-    let projectsSection = document.getElementById('projects-container');
+    let projectsSection = document.getElementById('projects-grid');
     projectsSection.innerHTML = "";
 
     let projects = projectManager.projects;
