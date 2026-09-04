@@ -117,7 +117,7 @@ function createProjectWidget(p)
 
     if(p.links?.length)
     {
-        const imgLabels = { external: 'external.svg', demo: 'motion_play.svg', download: 'download.svg' };
+        const imgLabels = { external: 'external.svg', demo: 'motion_play.svg', download: 'download.svg', github: 'github.svg' };
         let container = createElement('div', ['project-card__badges']);
         p.links.forEach(e => {
             if(imgLabels[e.type])
@@ -128,7 +128,7 @@ function createProjectWidget(p)
                 let tooltip = createElement('span', ['project-card__badge-tooltip']);
                 img.src = `assets/icons/${imgLabels[e.type]}`;
                 // iconRef.title = e.type;
-                tooltip.innerText = e.type.charAt(0).toUpperCase() + e.type.slice(1);
+                tooltip.innerText = e.name ? e.name : e.type.charAt(0).toUpperCase() + e.type.slice(1);
                 Object.assign(badge, { href: e.url, target: "_blank" });
                 badge.appendChild(img);
                 badgeWrapper.appendChild(tooltip);

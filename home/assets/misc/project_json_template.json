@@ -1,0 +1,41 @@
+{
+        "title": "Portfolio Website",
+        "subtitle": "Personal Website",
+        "categories": [
+            {
+                "name": "Personal",
+                "abbrev": "Pers"
+            }
+        ],
+        "skills": [
+            {
+                "name": "HTML",
+                "category": "Web Development",
+                "abbrev": "HTML"
+            },
+            {
+                "name": "CSS",
+                "category": "Web Development",
+                "abbrev": "CSS"
+            },
+            {
+                "name": "Javascript",
+                "category": "Programming",
+                "abbrev": "JS"
+            },
+            {
+                "name": "Web Design",
+                "category": "Design",
+                "abbrev": "Web"
+            }
+        ],
+        "overview": "A personal portfolio website showcasing projects, skills, and professional experience.",
+        "description": "<ul><li>Designed and developed a responsive personal portfolio website to showcase projects, skills, and professional experience.</li><li>Utilized HTML, CSS, and JavaScript to create an interactive and visually appealing user interface.</li><li>Demonstrated proficiency in web development, design principles, and user experience optimization.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/portfolio.png",
+        "links": [
+            {
+                "type": "external",
+                "url": "/home/"
+            }
+        ]
+    }

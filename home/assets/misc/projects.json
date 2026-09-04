@@ -46,11 +46,18 @@
         "links": [
             {
                 "type": "download",
+                "name": "Build",
                 "url": "https://drive.google.com/drive/folders/1Llp1lbSOg3UnoyniWrSDCoPhBjx5e8yl?usp=drive_link"
             },
             {
-                "type": "external",
-                "url": "https://changelingvr.com"
+                "type": "download",
+                "name": "Poster PDF",
+                "url": "https://drive.google.com/file/d/1Iln_c6dwh4OQpYyLHXRc3DXvc73DsXlR/view?usp=drive_link"
+            },
+            {
+                "type": "download",
+                "name": "Report PDF",
+                "url": "https://drive.google.com/file/d/1_zh96AR2fh_IBFnXyTO6WE-fuyAM5HOn/view?usp=drive_link"
             }
         ]
     },
@@ -137,7 +144,7 @@
         ],
         "overview": "Interactive data visualization tool exploring global income inequality using Unity and Python.",
         "description": "<ul><li>Built an interactive Unity-based application to visualize the impact of income inequality over time using Python and GeoJSON data.</li><li>Combined advanced data analysis techniques with Unity tools to present chronological trends, showcasing technical expertise in programming, data parsing, and spatial visualization tools like Mapbox.</li></ul>",
-        "imagePath": "assets/images/project_thumbnails/igme_386.gif",
+        "imagePath": "assets/images/project_thumbnails/igme386.gif",
         "links": []
     },
     {
@@ -192,28 +199,137 @@
         ],
         "skills": [
             {
-                "name": "Javascript",
-                "category": "Programming",
-                "abbrev": "JS"
+                "name": "Machine Learning",
+                "category": "Artificial Intelligence",
+                "abbrev": "ML"
             },
             {
-                "name": "Web Design",
-                "category": "Design",
-                "abbrev": "Web"
+                "name": "Natural Language Processing",
+                "category": "Artificial Intelligence",
+                "abbrev": "NLP"
             },
             {
-                "name": "UI/UX Design",
-                "category": "Design",
-                "abbrev": "UIUX"
+                "name": "Deep Learning",
+                "category": "Artificial Intelligence",
+                "abbrev": "DL"
             }
         ],
         "overview": "Educational tool that visualizes terrain generation using Delauney triangulation and adjustable parameters.",
         "description": "<ul><li>Developed an interactive web-based tool to demonstrate the Delaunay triangulation algorithm, showcasing expertise in computational geometry and real-time 3D rendering.</li><li>Implemented a user-friendly interface and utilized Three.js to create dynamic, visually engaging terrain visualizations.</li><li>Highlights ability to combine algorithm design with interactive web development.</li></ul>",
-        "imagePath": "assets/images/project_thumbnails/csci_716.png",
+        "imagePath": "assets/images/project_thumbnails/csci716.png",
         "links": [
             {
                 "type": "demo",
                 "url": "https://joshuaradford.github.io/716/"
+            }
+        ]
+    },
+    {
+        "title": "Sentiment Analysis",
+        "subtitle": "Research Project",
+        "categories": [
+            {
+                "name": "Academic",
+                "abbrev": "Acad"
+            }
+        ],
+        "skills": [
+            {
+                "name": "Python",
+                "category": "Programming",
+                "abbrev": "Py"
+            },
+            {
+                "name": "Machine Learning",
+                "category": "Artificial Intelligence",
+                "abbrev": "ML"
+            },
+            {
+                "name": "Natural Language Processing",
+                "category": "Artificial Intelligence",
+                "abbrev": "NLP"
+            },
+            {
+                "name": "Neural Networks",
+                "category": "Artificial Intelligence",
+                "abbrev": "NN"
+            },
+            {
+                "name": "Data Analysis",
+                "category": "Data Science",
+                "abbrev": "Data"
+            }
+        ],
+        "overview": "Sentiment analysis study comparing ensemble and attention-based neural networks across multiple text domains.",
+        "description": "<ul><li>Implemented and evaluated an attention-based LSTM model for binary sentiment classification, comparing its performance against a hybrid BiLSTM-ANN ensemble model.</li><li>Developed NLP preprocessing and feature engineering pipelines using NLTK, WordNet hypernyms, tokenization, POS tagging, stopword removal, and pretrained GloVe word embeddings.</li><li>Evaluated model generalization across movie reviews, Twitter posts, and financial news, with the AT-LSTM achieving 84.41% validation accuracy and outperforming the ensemble model across all three datasets.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/csci635.png",
+        "links": [
+            {
+                "type": "external",
+                "name": "Presentation Video",
+                "url": "https://youtu.be/Xs7BJHxEmdE?si=oEKG-6VKKsIQqqn4"
+            },
+            {
+                "type": "github",
+                "name": "Github",
+                "url": "https://github.com/Alex-Gideon/635Group3Project/tree/main"
+            },
+            {
+                "type": "download",
+                "name": "Presentation PDF",
+                "url": "https://drive.google.com/file/d/1LtLktgpewNUfhlc1yx8bresixf4dUQ_p/view?usp=drive_link"
+            },
+            {
+                "type": "download",
+                "name": "Report PDF",
+                "url": "https://drive.google.com/file/d/1SP96GD83mpHIGLEM5gegZ9F8VmGrb5GR/view?usp=drive_link"
+            }
+        ]
+    },
+    {
+        "title": "Graph-Based Information Retrieval Analysis",
+        "subtitle": "Research Project",
+        "categories": [
+            {
+                "name": "Academic",
+                "abbrev": "Acad"
+            }
+        ],
+        "skills": [
+            {
+                "name": "Python",
+                "category": "Programming",
+                "abbrev": "Py"
+            },
+            {
+                "name": "Information Retrieval",
+                "category": "Artificial Intelligence",
+                "abbrev": "IR"
+            },
+            {
+                "name": "Data Analysis",
+                "category": "Data Science",
+                "abbrev": "Data"
+            }
+        ],
+        "overview": "Sensitivity analysis of evaluation coefficients used to rank graph-based information retrieval models.",
+        "description": "<ul><li>Performed a secondary analysis of existing Pruned and Conceptualized Graphical Set-Based information retrieval models evaluated on the Cystic Fibrosis Collection.</li><li>Designed and executed systematic parameter sweeps over fusion coefficients representing relative performance, mean average precision, and graph-pruning efficiency to measure their effect on model rankings.</li><li>Developed Python scripts and Matplotlib visualizations to compare ranking behavior across coefficient combinations, identifying strong overall preference for conceptualized graph models and sensitivity to pruning and precision weights.</li></ul>",
+        "imagePath": "assets/images/project_thumbnails/csci536-636.png",
+        "links": [
+            {
+                "type": "download",
+                "name": "Presentation PDF",
+                "url": "https://drive.google.com/file/d/1aDVzdS_kJsfSbZVYBmFKTtNqyZ1Cx5-c/view?usp=drive_link"
+            },
+            {
+                "type": "download",
+                "name": "Report PDF",
+                "url": "https://drive.google.com/file/d/1QC4dEKGoNrpXTQeMUU0iWGHyZQ2fh-No/view?usp=drive_link"
+            },
+            {
+                "type": "github",
+                "name": "Github",
+                "url": "https://github.com/notarealnova/635Group3Project"
             }
         ]
     }
